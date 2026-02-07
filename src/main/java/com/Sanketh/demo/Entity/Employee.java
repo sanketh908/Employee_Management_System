@@ -10,5 +10,6 @@ public class Employee {
     private String desingnation ;
     private String department;
     private double salary;
-    private List<>
+    private List<Leave> leaves;
+    private List<Duty> duties;
 }
