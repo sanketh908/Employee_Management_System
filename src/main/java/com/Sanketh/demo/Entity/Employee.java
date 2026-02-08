@@ -1,15 +1,32 @@
 package com.Sanketh.demo.Entity;
 
-import java.util.List;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 
+import java.util.List;
+@Entity
+@Table(name = "employee_table")
 public class Employee {
+    @Id
+    @Column(name = "emp_id",unique = true,nullable = false)
     private int id;
+    @Column(name = "emp_name",nullable = false)
     private String  name;
+    @Column( name = "emp_gender",nullable = false)
     private String gender;
+    @Column(name = "emp_age",nullable = false)
     private int age ;
+    @Column(name = "emp_desingnation",nullable = false)
     private String desingnation ;
+    @Column(name = "emp_department",nullable = false)
     private String department;
+    @Column(name = "emp_salary",nullable = false)
     private double salary;
+    @Column(name = "emp_contact",nullable = false,unique = true)
+    private String contact;
+
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Leave> leaves;
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Duty> duties;
 }
