@@ -9,6 +9,7 @@ import java.util.List;
 @Table(name = "manager_table")
 public class Manager {
     @Id
+    @Column(name = "manager_id")
     private long id;
     @Column(name = "manager_name",nullable = false)
     private String name;
@@ -41,6 +42,9 @@ public class Manager {
                 '}';
     }
 
-    @OneToMany(mappedBy = "Manager",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignedbymanager",cascade = CascadeType.ALL)
     private List<Duty> dutyList;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 }
