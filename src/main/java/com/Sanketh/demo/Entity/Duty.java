@@ -1,12 +1,40 @@
 package com.Sanketh.demo.Entity;
 
-public class Duty {
-    private long id;
-    private String title;
-    private String description;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
+@Entity
+@Table(name = "duty_table")
+public class Duty {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable = false)
+    private String title;
+    @Column(nullable = false,length = 3000)
+    private String description;
+    @ManyToOne
+    @Column(name = "emp_id")
     private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "assignedbymanager")
     private Manager assinedbymanager;
+
+    @Override
+    public String toString() {
+        return "Duty{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", employee=" + employee +
+                ", assinedbymanager=" + assinedbymanager +
+                ", assinedbyadmin=" + assinedbyadmin +
+                '}';
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "assignedbyadmin")
     private Admin assinedbyadmin;
 
 }
