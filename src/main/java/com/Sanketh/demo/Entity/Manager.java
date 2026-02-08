@@ -6,10 +6,12 @@ import java.util.List;
 @Entity
 @Table(name = "manager_table")
 public class Manager {
-    @Column(name = "manager_id",nullable = false,unique = true)
+    @Id
     private long id;
     @Column(name = "manager_name",nullable = false)
     private String name;
+    @Column(name = "manager_name",nullable = false)
+    private String username;
     @Column(name = "manager_email",nullable = false,unique = true)
     private String email;
     @Column(name = "manager_password",nullable = false)
