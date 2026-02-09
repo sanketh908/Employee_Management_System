@@ -10,6 +10,5 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
-   List<Employee> findByNameIgnoreCase(String name);
-
+   Employee
 }

@@ -19,9 +19,9 @@ public class Duty {
     private Employee employee;
     @ManyToOne
     @JoinColumn(name = "assignedbymanager")
-    private Manager assinedbymanager;
+    private Manager assignedbymanager;
     @ManyToOne
     @JoinColumn(name = "assignedbyadmin")
-    private Admin assinedbyadmin;
+    private Admin assignedbyadmin;
 
 }
