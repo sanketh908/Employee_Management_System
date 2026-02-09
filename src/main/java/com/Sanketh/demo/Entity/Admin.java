@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name= "admin_table")
 public class Admin {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private int id;
     @Column(nullable = false,unique = true)
@@ -16,13 +16,6 @@ public class Admin {
    @Column(nullable = false,unique = true)
    private  String email;
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
+
+
 }

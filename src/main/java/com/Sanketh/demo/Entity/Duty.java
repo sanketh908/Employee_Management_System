@@ -15,23 +15,13 @@ public class Duty {
     @Column(nullable = false,length = 3000)
     private String description;
     @ManyToOne
-    @Column(name = "emp_id")
+    @JoinColumn(name = "emp_id")
     private Employee employee;
     @ManyToOne
-    @JoinColumn(name = "assignedbymanager")
+    @JoinColumn(name = "manager_id")
     private Manager assinedbymanager;
 
-    @Override
-    public String toString() {
-        return "Duty{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", employee=" + employee +
-                ", assinedbymanager=" + assinedbymanager +
-                ", assinedbyadmin=" + assinedbyadmin +
-                '}';
-    }
+
 
     @ManyToOne
     @JoinColumn(name = "assignedbyadmin")

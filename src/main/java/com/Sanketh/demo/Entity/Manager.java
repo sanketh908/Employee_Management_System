@@ -24,25 +24,12 @@ public class Manager {
     @Column(name = "manager_contact",nullable = false,unique = true)
     private String contact;
 
-    @OneToMany(mappedBy = "Manager",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
     private List<Employee> employeeList;
 
-    @Override
-    public String toString() {
-        return "Manager{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", department='" + department + '\'' +
-                ", contact='" + contact + '\'' +
-                ", employeeList=" + employeeList +
-                ", dutyList=" + dutyList +
-                '}';
-    }
 
-    @OneToMany(mappedBy = "assignedbymanager",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "assinedbymanager",cascade = CascadeType.ALL)
     private List<Duty> dutyList;
     @ManyToOne
     @JoinColumn(name = "manager_id")

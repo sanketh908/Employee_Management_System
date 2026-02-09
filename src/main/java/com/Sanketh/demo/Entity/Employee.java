@@ -1,9 +1,10 @@
 package com.Sanketh.demo.Entity;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+import lombok.Data;
 
 import java.util.List;
+@Data
 @Entity
 @Table(name = "employee_table")
 public class Employee {
@@ -11,7 +12,7 @@ public class Employee {
     @Column(name = "emp_id",unique = true,nullable = false)
     private int id;
     @Column(name = "emp_name",nullable = false)
-    private String  name;
+    private String name;
     @Column( name = "emp_gender",nullable = false)
     private String gender;
     @Column(name = "emp_age",nullable = false)
