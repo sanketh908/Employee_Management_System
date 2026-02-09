@@ -18,7 +18,7 @@ public class Employee {
     @Column(name = "emp_age",nullable = false)
     private int age ;
     @Column(name = "emp_desingnation",nullable = false)
-    private String desingnation ;
+    private String  designation;
     @Column(name = "emp_department",nullable = false)
     private String department;
     @Column(name = "emp_salary",nullable = false)
@@ -30,4 +30,7 @@ public class Employee {
     private List<Leave> leaves;
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Duty> duties;
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 }

@@ -32,6 +32,6 @@ public class Manager {
     @OneToMany(mappedBy = "assignedbymanager",cascade = CascadeType.ALL)
     private List<Duty> dutyList;
     @ManyToOne
-    @JoinColumn(name ="reports_to_id")
-    private Manager manager;
+    @JoinColumn(name ="supervisor_id")
+    private Manager supervisor;
 }
