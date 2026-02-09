@@ -29,7 +29,7 @@ public class Manager {
 
 
 
-    @OneToMany(mappedBy = "assinedbymanager",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assignedbymanager",cascade = CascadeType.ALL)
     private List<Duty> dutyList;
     @ManyToOne
     @JoinColumn(name = "manager_id")
