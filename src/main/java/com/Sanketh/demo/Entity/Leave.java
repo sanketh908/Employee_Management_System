@@ -1,28 +1,29 @@
 package com.Sanketh.demo.Entity;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 @Data
-@Entity
-@Table(name = "leave_table")
+@Document(collation = "leave")
 public class Leave {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column(nullable = false)
+
+    private ObjectId id;
+
     private LocalDate startdate;
-    @Column(nullable = false)
+
     private LocalDate enddate;
-    @Column(nullable = false)
+
     private String reason;
 
 
 
-    @Column(nullable = false)
+
     private String stats;
-    @ManyToOne
-    @JoinColumn(name = "emp_id")
+
     private Employee employee;
 }

@@ -2,7 +2,9 @@ package com.Sanketh.demo.Entity;
 
 
 import lombok.Data;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 public class Manager {
     @Id
 
-    private long id;
+    private ObjectId id;
 
     private String name;
 
@@ -25,14 +27,13 @@ public class Manager {
 
     private String contact;
 
-    @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
+   @DBRef
     private List<Employee> employeeList;
 
 
 
-    @OneToMany(mappedBy = "assignedbymanager",cascade = CascadeType.ALL)
+   @DBRef
     private List<Duty> dutyList;
-    @ManyToOne
-    @JoinColumn(name ="supervisor_id")
+  @DBRef
     private Manager supervisor;
 }

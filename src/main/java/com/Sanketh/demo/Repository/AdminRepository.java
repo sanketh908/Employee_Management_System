@@ -1,10 +1,12 @@
 package com.Sanketh.demo.Repository;
 
 import com.Sanketh.demo.Entity.Admin;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin,Integer> {
+public interface AdminRepository extends MongoRepository<Admin, ObjectId> {
 
 }

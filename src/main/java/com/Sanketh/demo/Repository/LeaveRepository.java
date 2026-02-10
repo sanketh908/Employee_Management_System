@@ -1,7 +1,9 @@
 package com.Sanketh.demo.Repository;
 
 import com.Sanketh.demo.Entity.Leave;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface LeaveRepository extends JpaRepository<Leave,Long> {
+
+public interface LeaveRepository extends MongoRepository<Leave, ObjectId> {
 }
