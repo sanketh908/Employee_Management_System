@@ -14,9 +14,8 @@
     @Document(collation = "admin")
     public class Admin {
         @Id
-
        private ObjectId id;
-       @Indexed(unique = true)
+
        private  String username;
 
        private  String password;

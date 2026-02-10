@@ -1,8 +1,8 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/EmployeeManagmentSystem
-      database: EmployeeManagmentSystem
+      host: localhost
+      port: 27017
       auto-index-creation: true
   application:
     name: EmployeeManagementSystem

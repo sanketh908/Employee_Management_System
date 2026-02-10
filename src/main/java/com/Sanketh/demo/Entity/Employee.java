@@ -14,7 +14,7 @@ import java.util.List;
 public class Employee {
     @Id
     private ObjectId id;
- @Indexed(unique = true)
+
     private String name;
 
     private String gender;
