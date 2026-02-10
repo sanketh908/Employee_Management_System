@@ -31,7 +31,7 @@ public class Employee {
 
     @DBRef
     private List<Leave> leaves;
-
+    @DBRef
     private List<Duty> duties;
 
     private Manager manager;
