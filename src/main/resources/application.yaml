@@ -1,16 +1,13 @@
 spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/EmployeeManagmentSystem
+      database: EmployeeManagmentSystem
+      auto-index-creation: true
   application:
     name: EmployeeManagementSystem
-  datasource:
-    url: jdbc:mysql://localhost:3306/employeemanagementsystemdb
-    username: root
-    password: sankethisapro
-  jpa:
-    hibernate.dll-auto: update
-    show-sql: true
-  properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+
+
   mail:
     host: smtp.gmail.com
     port: 587

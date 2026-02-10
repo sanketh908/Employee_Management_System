@@ -2,8 +2,11 @@
 
     import jakarta.persistence.*;
     import lombok.Data;
+
+    import java.lang.annotation.Documented;
+
     @Data
-    @Entity
+    @Document
     @Table(name= "admin_table")
     public class Admin {
         @Id
