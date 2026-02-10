@@ -1,8 +1,11 @@
 package com.Sanketh.demo.Entity;
 
-import jakarta.persistence.*;
+
 import lombok.Data;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -10,9 +13,8 @@ import java.util.List;
 @Document(collection = "Employee")
 public class Employee {
     @Id
-
-    private long  id;
-
+    private ObjectId id;
+ @Indexed(unique = true)
     private String name;
 
     private String gender;
@@ -24,14 +26,13 @@ public class Employee {
     private String department;
 
     private double salary;
-    @Column(name = "emp_contact",nullable = false,unique = true)
+
     private String contact;
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @DBRef
     private List<Leave> leaves;
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+
     private List<Duty> duties;
-    @ManyToOne
-    @JoinColumn(name = "manager_id")
+
     private Manager manager;
 }

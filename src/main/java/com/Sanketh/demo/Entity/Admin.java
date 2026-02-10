@@ -1,22 +1,26 @@
     package com.Sanketh.demo.Entity;
 
-    import jakarta.persistence.*;
+
     import lombok.Data;
+    import org.bson.types.ObjectId;
+    import org.springframework.data.annotation.Id;
+    import org.springframework.data.mongodb.core.index.Indexed;
+    import org.springframework.data.mongodb.core.mapping.Document;
 
     import java.lang.annotation.Documented;
 
     @Data
-    @Document
-    @Table(name= "admin_table")
+
+    @Document(collation = "admin")
     public class Admin {
         @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-       private int id;
-        @Column(nullable = false,unique = true)
+
+       private ObjectId id;
+       @Indexed(unique = true)
        private  String username;
-        @Column(nullable = false)
+
        private  String password;
-       @Column(nullable = false,unique = true)
+
        private  String email;
 
 
