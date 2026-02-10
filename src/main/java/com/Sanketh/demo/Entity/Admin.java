@@ -11,7 +11,7 @@
 
     @Data
 
-    @Document(collation = "admin")
+    @Document(collection = "admin")
     public class Admin {
         @Id
        private ObjectId id;

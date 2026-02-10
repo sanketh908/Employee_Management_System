@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 @Data
-@Document(collection = "Employee")
+@Document(collection= "Employee")
 public class Employee {
     @Id
     private ObjectId id;
