@@ -26,7 +26,7 @@ public class Employee {
     public  String username;
     @Column(name = "emp_email",nullable = false)
     private String email;
-    @Column(name = "")
+    @Column(name = "emp_password",nullable = false)
     private String password;
 
 
