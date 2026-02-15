@@ -1,4 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Repository;
 
-public interface LeaveRepository {
+import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LeaveRepository extends JpaRepository<Leave,Integer> {
 }

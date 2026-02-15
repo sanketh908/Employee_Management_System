@@ -1,4 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Repository;
 
-public interface ManagerRepository {
+import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ManagerRepository extends JpaRepository<Manager,Integer> {
 }
