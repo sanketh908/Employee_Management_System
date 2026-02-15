@@ -35,9 +35,9 @@ public class Employee {
 
 
 
-    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     private List<Leave> leaves;
-    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
     public List<Duty>  dutys;
 
 

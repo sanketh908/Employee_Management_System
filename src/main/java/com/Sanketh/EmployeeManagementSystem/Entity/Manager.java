@@ -22,9 +22,8 @@ public class Manager {
     private String contact;
 
     @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
-    @JoinColumn()
     private List<Employee> employees;
-    @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assiendbymanager",cascade = CascadeType.ALL)
     private List<Duty> DutysAssined;
 
 }
