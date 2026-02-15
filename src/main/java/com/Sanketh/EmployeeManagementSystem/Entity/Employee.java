@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "employee_table")
 public class Employee {
     @Id
+    @Column(name = "emp_id")
     private long  id;
     @Column(name = "emp_name", nullable = false)
     private  String name;
@@ -28,6 +29,9 @@ public class Employee {
     @Column(name = "emp_password",nullable = false)
     private String password;
 
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
 
 
 
