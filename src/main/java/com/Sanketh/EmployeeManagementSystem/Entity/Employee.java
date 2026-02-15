@@ -7,24 +7,23 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Employee_table")
+@Table(name = "employee_table")
 public class Employee {
     @Id
-
-   private long  id;
+    private long  id;
     @Column(name = "emp_name", nullable = false)
-   private  String name;
+    private  String name;
     @Column(name = "emp_gender",nullable = false)
     private String gender;
     @Column(name = "emp_age",nullable = false)
-   private  int age;
+    private  int age;
     @Column(name = "emp_salary",nullable = false)
     private double salary;
     @Column(name = "emp_dept",nullable = false)
     private String department;
-    @Column(name = "emp_username",nullable = false)
+    @Column(name = "emp_username",nullable = false,unique = true)
     public  String username;
-    @Column(name = "emp_email",nullable = false)
+    @Column(name = "emp_email",nullable = false,unique = true)
     private String email;
     @Column(name = "emp_password",nullable = false)
     private String password;
@@ -32,9 +31,9 @@ public class Employee {
 
 
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
     private List<Leave> leaves;
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employees",cascade = CascadeType.ALL)
     public List<Duty>  dutys;
 
 
