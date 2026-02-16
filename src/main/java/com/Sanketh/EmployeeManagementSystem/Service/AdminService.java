@@ -5,6 +5,7 @@ import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 public class AdminService {
     private final AdminRepository adminRepository;
@@ -25,7 +26,10 @@ public class AdminService {
             return null;
         }
     }
-    public Manager addManager(Manager manager);
+    public Manager addManager(Manager manager)
+    {
+
+    }
     public List<Manager> getAllManagers();
     public String deleteManager();
     public List<Employee> getAllEmployees();
@@ -35,5 +39,9 @@ public class AdminService {
     public String assigndutyToManager(Duty duty,int managerId);
     public String assigndutyToEmployee(Employee employee,int managerId);
      public List<Leave>   getAllLeavesApplication();
-
+    private int generateRandomManagerId()
+    {
+        Random random = new Random();
+        return random.nextInt(1000,9999);
+    }
 }
