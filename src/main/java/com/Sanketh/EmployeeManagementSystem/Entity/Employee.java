@@ -28,6 +28,8 @@ public class Employee {
     private String email;
     @Column(name = "emp_password",nullable = false)
     private String password;
+    @Column(name = "emp_accountstats",nullable = false)
+    public String accountstats;
 
     @ManyToOne
     @JoinColumn(name = "manager_id")
