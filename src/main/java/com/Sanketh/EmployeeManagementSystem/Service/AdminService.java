@@ -46,7 +46,7 @@ public class AdminService {
         Random random = new Random();
         return random.nextInt(1000,9999);
     }
-    public int geneateRandomPassword(int lenght)
+    public String geneateRandomPassword(int lenght)
     {
       String upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       String lower="abcdefghijklmnopqrstuvwxyz";
@@ -63,5 +63,6 @@ public class AdminService {
       {
           stringBuilder.append(combin.charAt(random.nextInt(combin.length())));
       }
+      return stringBuilder.toString();
     }
 }
