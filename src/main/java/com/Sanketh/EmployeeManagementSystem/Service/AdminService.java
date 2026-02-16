@@ -28,6 +28,8 @@ public class AdminService {
     }
     public Manager addManager(Manager manager)
     {
+        int managerId = generateRandomManagerId();
+        manager.setId(managerId);
 
     }
     public List<Manager> getAllManagers();
