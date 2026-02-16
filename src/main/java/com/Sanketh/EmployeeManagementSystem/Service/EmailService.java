@@ -29,11 +29,18 @@ public class EmailService {
           message.setTo(to);
           message.setText(body);
           mailSender.send(message);
-           email.setStatus("sent successfully");
+           email.setStatus("successfully");
        }catch (MailException e){
            email.setStatus("failed");
            log.error("Error while sending email {}", String.valueOf(e));
 
        }
+    }
+    public void sendResently(String toEmail,String resetlink) {
+      String subject ="Password Reset Reequest link";
+      String body="Hello \n\n click the below reset link to reset your password:\n"+resetlink+"\n\n if you have didn't request this please ignore this email ";
+      sendEmail(toEmail,subject,body);
+
+
     }
 }
