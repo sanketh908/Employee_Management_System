@@ -38,7 +38,12 @@ public class AdminService {
         String randomPassword = geneateRandomPassword(8);
         manager.setPassword(randomPassword);
         Manager savedmanager =managerRepository.save(manager);
-        return savedmanager;
+        String subject="Welcome Manager to Employee Management System";
+        String body="Hi "+manager.getUsername()+
+                    "! Welcome to Employee Management System!\n\n"+
+                    "you have been Successfully added to the EMC \n\n Manager Id :"+manager.getId()+
+                    "\n\nUsername :"+manager.getUsername()+
+                    "\n\nPassword :"+manager.getPassword();
 
 
     }
