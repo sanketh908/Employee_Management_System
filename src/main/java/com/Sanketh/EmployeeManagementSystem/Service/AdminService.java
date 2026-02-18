@@ -2,6 +2,7 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.*;
 import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.EmailRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
 
@@ -11,11 +12,13 @@ import java.util.Random;
 
 public class AdminService {
     private final AdminRepository adminRepository;
-    private final ManagerRepository managerRepository;
-
-    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository) {
+    private final  ManagerRepository managerRepository;
+    private  final EmailService emailService;
+    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService) {
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
+        this.emailService = emailService;
+
     }
 
 
@@ -44,6 +47,8 @@ public class AdminService {
                     "you have been Successfully added to the EMC \n\n Manager Id :"+manager.getId()+
                     "\n\nUsername :"+manager.getUsername()+
                     "\n\nPassword :"+manager.getPassword();
+        emailService.sendEmail(manager.getEmail(),subject,body);
+
 
 
     }
