@@ -2,8 +2,8 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.*;
 import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
-import com.Sanketh.EmployeeManagementSystem.Repository.EmailRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
 
 import java.util.List;
@@ -15,11 +15,13 @@ public class AdminService {
     private final  ManagerRepository managerRepository;
     private  final EmailService emailService;
     private  final EmployeeRepository employeeRepository;
-    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository) {
+    private final LeaveRepository leaveRepository;
+    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository, LeaveRepository leaveRepository) {
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
         this.emailService = emailService;
         this.employeeRepository = employeeRepository;
+        this.leaveRepository = leaveRepository;
     }
 
 
@@ -97,12 +99,23 @@ public class AdminService {
         return employeeRepository.count();
     }
 
-     public String assigndutyToManager(Duty duty,int managerId)
-     {
-
-     }
+//     public String assigndutyToManager(Duty duty,int managerId)
+//     {
+//        Optional<Manager> manager=managerRepository.findById(managerId);
+//        if(manager.isPresent())
+//        {
+//
+//        }
+//        else
+//        {
+//            return "Manager not found";
+//        }
+//     }
 //    public String assigndutyToEmployee(Employee employee,int managerId);
-//     public List<Leave>   getAllLeavesApplication();
+     public List<Leave>getAllLeavesApplication()
+     {
+         return leaveRepository.findAll();
+     }
     private int generateRandomManagerId()
     {
         Random random = new Random();
