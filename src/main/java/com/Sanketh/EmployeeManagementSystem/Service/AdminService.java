@@ -14,11 +14,12 @@ public class AdminService {
     private final AdminRepository adminRepository;
     private final  ManagerRepository managerRepository;
     private  final EmailService emailService;
-    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService) {
+    private  final EmployeeRepository employeeRepository;
+    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository) {
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
         this.emailService = emailService;
-
+        this.employeeRepository = employeeRepository;
     }
 
 
@@ -48,17 +49,58 @@ public class AdminService {
                     "\n\nUsername :"+manager.getUsername()+
                     "\n\nPassword :"+manager.getPassword();
         emailService.sendEmail(manager.getEmail(),subject,body);
+        return savedmanager;
 
 
 
     }
-//    public List<Manager> getAllManagers();
-//    public String deleteManager();
-//    public List<Employee> getAllEmployees();
-//    public String deleteEmployee();
-//    public long managerCount();
-//    public long employeeCount();
-//    public String assigndutyToManager(Duty duty,int managerId);
+    public List<Manager> getAllManagers(){
+        return managerRepository.findAll();
+    }
+    public String deleteManager(int id)
+    {
+        Optional<Manager> manager=managerRepository.findById(id);
+        if (manager.isPresent())
+        {
+            managerRepository.deleteById(id);
+            return "Manager "+manager.get().getUsername()+" has been deleted";
+        }
+        else
+        {
+            return "Manager not found";
+        }
+    }
+    public List<Employee> getAllEmployees()
+    {
+        return employeeRepository.findAll();
+    }
+    public String deleteEmployee(int id)
+    {
+        Optional<Employee> employee=employeeRepository.findById(id);
+        if (employee.isPresent())
+        {
+            employeeRepository.deleteById(id);
+            return "Employee "+employee.get().getUsername()+" has been deleted";
+        }
+        else
+        {
+            return "Employee not found";
+        }
+
+    }
+    public long managerCount()
+    {
+        return managerRepository.count();
+    }
+    public long employeeCount()
+    {
+        return employeeRepository.count();
+    }
+
+     public String assigndutyToManager(Duty duty,int managerId)
+     {
+
+     }
 //    public String assigndutyToEmployee(Employee employee,int managerId);
 //     public List<Leave>   getAllLeavesApplication();
     private int generateRandomManagerId()
