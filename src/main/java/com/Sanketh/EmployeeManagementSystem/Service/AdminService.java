@@ -2,6 +2,8 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.*;
 import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +11,13 @@ import java.util.Random;
 
 public class AdminService {
     private final AdminRepository adminRepository;
+    private final ManagerRepository managerRepository;
 
-    public AdminService(AdminRepository adminRepository) {
+    public AdminService(AdminRepository adminRepository, ManagerRepository managerRepository) {
         this.adminRepository = adminRepository;
+        this.managerRepository = managerRepository;
     }
+
 
     public Admin checkAdminlogin(String username,String password)
     {
@@ -30,17 +35,22 @@ public class AdminService {
     {
         int managerId = generateRandomManagerId();
         manager.setId(managerId);
+        String randomPassword = geneateRandomPassword(8);
+        manager.setPassword(randomPassword);
+        Manager savedmanager =managerRepository.save(manager);
+        return savedmanager;
+
 
     }
-    public List<Manager> getAllManagers();
-    public String deleteManager();
-    public List<Employee> getAllEmployees();
-    public String deleteEmployee();
-    public long managerCount();
-    public long employeeCount();
-    public String assigndutyToManager(Duty duty,int managerId);
-    public String assigndutyToEmployee(Employee employee,int managerId);
-     public List<Leave>   getAllLeavesApplication();
+//    public List<Manager> getAllManagers();
+//    public String deleteManager();
+//    public List<Employee> getAllEmployees();
+//    public String deleteEmployee();
+//    public long managerCount();
+//    public long employeeCount();
+//    public String assigndutyToManager(Duty duty,int managerId);
+//    public String assigndutyToEmployee(Employee employee,int managerId);
+//     public List<Leave>   getAllLeavesApplication();
     private int generateRandomManagerId()
     {
         Random random = new Random();
