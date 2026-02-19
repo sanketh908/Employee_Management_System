@@ -2,6 +2,7 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
+import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.Optional;
 @Service
 public class ManagerServiceImp implements ManagerService{
     private final ManagerRepository managerRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public ManagerServiceImp(ManagerRepository managerRepository) {
+    public ManagerServiceImp(ManagerRepository managerRepository, EmployeeRepository employeeRepository) {
         this.managerRepository = managerRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -46,22 +49,37 @@ public class ManagerServiceImp implements ManagerService{
 
     @Override
     public Manager findManagerByUsername(String username) {
-        return null;
+       Optional<Manager> manager = managerRepository.findManagerByUsername(username);
+       if(manager.isPresent()){
+           return manager.get();
+       }
+       else
+       {
+           log.info("Manager not found");
+           return null;
+       }
     }
 
     @Override
     public Manager findManagerByEmail(String email) {
-        return null;
+        Optional<Manager> manager=managerRepository.findManagerByEmail(email);
+        if(manager.isPresent()){
+            return manager.get();
+        }else
+        {
+            log.info("Manager not found");
+            return null;
+        }
     }
 
     @Override
     public List<Manager> viewAllManagers() {
-        return List.of();
+        return managerRepository.findAll();
     }
 
     @Override
     public List<Employee> viewAllEmployees() {
-        return List.of();
+        return employeeRepository.findAll();
     }
 
     @Override
