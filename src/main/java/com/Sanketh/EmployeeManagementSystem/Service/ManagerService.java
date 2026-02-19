@@ -14,4 +14,9 @@ public interface ManagerService {
     public List<Employee> viewAllEmployees();
     public String updateEmployeeAccountStatus(Long  id,String status);
     public String generateResetToken(String email);
+    public boolean validateResetToken(String token);
+    public boolean changePassword(Manager manager,String oldPassword,String newPassword);
+    public void updatePassword(String token,String newPassword);
+    public void deleteResetToken(String token);
+    public boolean isTokenExpired(String token);
 }
