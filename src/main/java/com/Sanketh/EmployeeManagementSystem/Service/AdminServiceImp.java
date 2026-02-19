@@ -70,7 +70,7 @@ public class AdminServiceImp implements AdminService {
         return managerRepository.findAll();
     }
     @Override
-    public String deleteManager(int id)
+    public String deleteManager(Integer id)
     {
         Optional<Manager> manager=managerRepository.findById(id);
         if (manager.isPresent())
@@ -89,7 +89,7 @@ public class AdminServiceImp implements AdminService {
         return employeeRepository.findAll();
     }
     @Override
-    public String deleteEmployee(int id)
+    public String deleteEmployee(Long id)
     {
         Optional<Employee> employee=employeeRepository.findById(id);
         if (employee.isPresent())
@@ -115,7 +115,7 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public String assigndutyToManager(Duty duty, int managerId) {
+    public String assigndutyToManager(Duty duty,Long managerId) {
         return "";
     }
 
@@ -129,7 +129,7 @@ public class AdminServiceImp implements AdminService {
      }
 
     @Override
-    public String assigndutyToEmployee(Employee employee, int managerId) {
+    public String assigndutyToEmployee(Employee employee,Long managerId) {
         return "";
     }
 

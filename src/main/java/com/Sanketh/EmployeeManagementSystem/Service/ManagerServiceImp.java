@@ -98,4 +98,9 @@ public class ManagerServiceImp implements ManagerService{
             return "employee account status not found";
         }
     }
+
+    @Override
+    public String generateResetToken(String email) {
+
+    }
 }

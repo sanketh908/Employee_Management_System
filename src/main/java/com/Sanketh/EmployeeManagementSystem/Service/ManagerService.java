@@ -13,4 +13,5 @@ public interface ManagerService {
     public List<Manager> viewAllManagers();
     public List<Employee> viewAllEmployees();
     public String updateEmployeeAccountStatus(Long  id,String status);
+    public String generateResetToken(String email);
 }

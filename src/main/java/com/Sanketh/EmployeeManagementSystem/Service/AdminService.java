@@ -9,15 +9,15 @@ public interface AdminService {
     public Manager addManager(Manager manager);
     public Manager checkManagerlogin(String username, String password);
     public List<Manager> getAllManagers();
-    public String deleteManager(int id);
+    public String deleteManager(Integer id);
     public List<Employee> getAllEmployees();
 
-    String deleteEmployee(int id);
+    String deleteEmployee(Long id);
 
     public long managerCount();
     public long employeeCount();
-    public String assigndutyToManager(Duty duty, int managerId);
+    public String assigndutyToManager(Duty duty, Long managerId);
     public List<Leave>getAllLeavesApplication();
-    public String assigndutyToEmployee(Employee employee,int managerId);
+    public String assigndutyToEmployee(Employee employee,Long managerId);
 
 }
