@@ -117,7 +117,7 @@ public class ManagerServiceImp implements ManagerService{
             resetToken.setToken(token);
             resetToken.setEmail(email);
             resetToken.setIssuedAt(LocalDateTime.now());
-            resetToken.setIssuedAt(LocalDateTime.now().plusMinutes(5));
+            resetToken.setExpiresAt(LocalDateTime.now().plusMinutes(5));
             resetTokenRepository.save(resetToken);
             return token;
         }
@@ -126,26 +126,44 @@ public class ManagerServiceImp implements ManagerService{
 
     @Override
     public boolean validateResetToken(String token) {
-        return false;
+        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+        return resetToken.isPresent() && !isTokenExpired(token);
+
     }
 
     @Override
     public boolean changePassword(Manager manager, String oldPassword, String newPassword) {
+        if(manager.getPassword().equals(oldPassword)){
+            manager.setPassword(newPassword);
+            managerRepository.save(manager);
+            return true;
+        }
         return false;
     }
 
     @Override
     public void updatePassword(String token, String newPassword) {
+       Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+       if (resetToken.isPresent() && !isTokenExpired(token)) {
+          Manager manager=new Manager();
+          manager.setPassword(newPassword);
+          managerRepository.save(manager);
+          deleteResetToken(token);
 
+       }
     }
 
     @Override
     public void deleteResetToken(String token) {
-
+        resetTokenRepository.deleteByToken(token);
     }
 
     @Override
     public boolean isTokenExpired(String token) {
-        return false;
+        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+        if(resetToken.isPresent()){
+            return resetToken.get().getExpiresAt().isBefore(LocalDateTime.now());
+        }
+        return true;
     }
 }

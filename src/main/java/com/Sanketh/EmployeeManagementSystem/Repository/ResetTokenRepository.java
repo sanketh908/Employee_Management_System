@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface ResetTokenRepository extends JpaRepository<ResetToken, Integer> {
     @Query("select r from ResetToken where r.token=?1")
     public ResetToken FindByToken(String token);
-    public Optional<ResetToken> findByToken(String token);
+    public  Optional<ResetToken> findByToken(String token);
     public Optional<ResetToken> findByEmail(String email);
 
     public Optional<ResetToken> deleteByToken(String token);
