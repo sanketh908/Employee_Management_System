@@ -9,6 +9,7 @@ import com.Sanketh.EmployeeManagementSystem.Repository.ResetTokenRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,10 +21,12 @@ public class ManagerServiceImp implements ManagerService{
     private final EmployeeRepository employeeRepository;
     private final ResetTokenRepository resetTokenRepository;
 
+
     public ManagerServiceImp(ManagerRepository managerRepository, EmployeeRepository employeeRepository, ResetTokenRepository resetTokenRepository) {
         this.managerRepository = managerRepository;
         this.employeeRepository = employeeRepository;
         this.resetTokenRepository = resetTokenRepository;
+
     }
 
     @Override
@@ -110,8 +113,15 @@ public class ManagerServiceImp implements ManagerService{
         Optional<Manager> manager=managerRepository.findByEmail(email);
         if(manager.isPresent()){
             String token= UUID.randomUUID().toString();
-            resetTokenRepository.s
+            ResetToken resetToken=new ResetToken();
+            resetToken.setToken(token);
+            resetToken.setEmail(email);
+            resetToken.setIssuedAt(LocalDateTime.now());
+            resetToken.setIssuedAt(LocalDateTime.now().plusMinutes(5));
+            resetTokenRepository.save(resetToken);
+            return token;
         }
+        return null ;
     }
 
     @Override
