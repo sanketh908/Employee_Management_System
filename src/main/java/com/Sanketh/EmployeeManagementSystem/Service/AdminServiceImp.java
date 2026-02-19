@@ -5,11 +5,12 @@ import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
-
+@Service
 public class AdminServiceImp implements AdminService {
     private final AdminRepository adminRepository;
     private final  ManagerRepository managerRepository;

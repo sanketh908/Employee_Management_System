@@ -11,7 +11,7 @@ public class Manager {
     @Id
     private int id;
     @Column(name = "manager_name",nullable = false)
-    private String username;
+    private String Username;
     @Column(name = "manager_email",nullable = false,unique = true)
     private String email;
     @Column(name = "manager_password",nullable = false,unique = true)
