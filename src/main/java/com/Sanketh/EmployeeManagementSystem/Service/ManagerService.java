@@ -12,5 +12,5 @@ public interface ManagerService {
     public Manager findManagerByEmail(String email);
     public List<Manager> viewAllManagers();
     public List<Employee> viewAllEmployees();
-    public String updateEmployeeAccountStatus(long  id,String status);
+    public String updateEmployeeAccountStatus(Long  id,String status);
 }

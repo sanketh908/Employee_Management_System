@@ -22,7 +22,7 @@ public class ManagerServiceImp implements ManagerService{
 
     @Override
     public Manager checkManagerlogin(String username, String password) {
-        Optional<Manager> manager= managerRepository.findByusernameAndpassword(username,password);
+        Optional<Manager> manager= managerRepository.findByUsernameAndPassword(username,password);
         if(manager.isPresent()){
             return manager.get();
         }else
@@ -49,7 +49,7 @@ public class ManagerServiceImp implements ManagerService{
 
     @Override
     public Manager findManagerByUsername(String username) {
-       Optional<Manager> manager = managerRepository.findManagerByUsername(username);
+       Optional<Manager> manager = managerRepository.findByUsername(username);
        if(manager.isPresent()){
            return manager.get();
        }
@@ -62,7 +62,7 @@ public class ManagerServiceImp implements ManagerService{
 
     @Override
     public Manager findManagerByEmail(String email) {
-        Optional<Manager> manager=managerRepository.findManagerByEmail(email);
+        Optional<Manager> manager=managerRepository.findByEmail(email);
         if(manager.isPresent()){
             return manager.get();
         }else
@@ -82,8 +82,20 @@ public class ManagerServiceImp implements ManagerService{
         return employeeRepository.findAll();
     }
 
+
+
     @Override
-    public String updateEmployeeAccountStatus(long id, String status) {
-        return "";
+    public String updateEmployeeAccountStatus(Long id, String status) {
+       Optional<Employee> employee=employeeRepository.findById(id);
+        if(employee.isPresent()){
+            Employee emp=employee.get();
+            emp.setAccountstats(status);
+            employeeRepository.save(emp);
+            return "employee account status updated succcessfully";
+        }
+        else {
+            log.info("Employee not found");
+            return "employee account status not found";
+        }
     }
 }
