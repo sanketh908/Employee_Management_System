@@ -8,11 +8,14 @@ import java.util.Random;
 public class RandomPasswordGenerator {
 
     //this was a method in the admin class before i made it a utility class
-    String upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    String lower="abcdefghijklmnopqrstuvwxyz";
-    String number="0123456789";
-    String spchar="!@#$%^&*()_+";
-    String combin=upper+lower+number+spchar;
+    static final String  upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static final String lower="abcdefghijklmnopqrstuvwxyz";
+    static final String number="0123456789";
+    static final String spchar="!@#$%^&*()_+";
+    static final String combin=upper+lower+number+spchar;
+    private RandomPasswordGenerator() {
+        throw new UnsupportedOperationException("Utility class");
+    }
     private String geneateRandomPassword(int lenght) {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
