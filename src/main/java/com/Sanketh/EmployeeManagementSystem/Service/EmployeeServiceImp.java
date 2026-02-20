@@ -42,12 +42,13 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public Employee findEmployeeById(Integer id) {
-        return null;
+       return employeeRepository.findById(id).orElse(null);
+
     }
 
     @Override
     public Employee findEmployeeByUsername(String username) {
-        return null;
+
     }
 
     @Override
