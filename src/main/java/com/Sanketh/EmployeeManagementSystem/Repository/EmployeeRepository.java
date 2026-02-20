@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository extends JpaRepository<Employee,Long> {
   public Employee findEmployeeByUsernameIgnoreCase(String username);
 
+  Employee findByUsernameAndPassword(String username, String password);
 }
