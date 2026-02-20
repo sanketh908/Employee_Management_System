@@ -29,7 +29,9 @@ public class EmployeeServiceImp implements EmployeeService{
         String password= RandomPasswordGenerator.geneateRandomPassword(8);
         employee.setPassword(password);
         employee.setAccountstats("Pending");
-
+        employee.setRole("Employee");
+        employeeRepository.save(employee);
+        return "Employee registered successfully";
     }
 
     @Override
