@@ -29,7 +29,10 @@ public class Employee {
     @Column(name = "emp_password",nullable = false)
     private String password;
     @Column(name = "emp_accountstats",nullable = false)
-    public String accountstats;
+    private String accountstats;
+    @Column(name = "emp_role",nullable = false)
+    private String role;
+
 
     @ManyToOne
     @JoinColumn(name = "manager_id")
