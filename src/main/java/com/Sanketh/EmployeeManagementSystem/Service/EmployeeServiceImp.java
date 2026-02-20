@@ -36,7 +36,8 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public String updateEmployeeProfile(Employee employee) {
-        return "";
+        employeeRepository.save(employee);
+        return "Employee profile updated successfully";
     }
 
     @Override
