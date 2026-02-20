@@ -28,6 +28,8 @@ public class EmployeeServiceImp implements EmployeeService{
         employee.setId(id);
         String password= RandomPasswordGenerator.geneateRandomPassword(8);
         employee.setPassword(password);
+        employee.setAccountstats("Pending");
+
     }
 
     @Override
