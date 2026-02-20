@@ -48,18 +48,15 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public Employee findEmployeeByUsername(String username) {
-
+        return employeeRepository.findByUsername(username);
     }
 
     @Override
     public Employee findEmployeeByEmail(String email) {
-        return null;
+        return employeeRepository.findByEmail(email);
     }
 
-    @Override
-    public Employee findEmployeeByPhone(String phone) {
-        return null;
-    }
+
 
     @Override
     public List<Employee> viewAllEmployees() {

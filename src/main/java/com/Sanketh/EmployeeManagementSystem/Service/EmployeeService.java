@@ -13,7 +13,7 @@ public interface EmployeeService {
     public Employee findEmployeeById(Integer id);
     public Employee findEmployeeByUsername(String username);
     public Employee findEmployeeByEmail(String email);
-    public Employee findEmployeeByPhone(String phone);
+
     public List<Employee> viewAllEmployees();
     public String updateAccountStatus(Integer id,String status);
     public List<Duty> viewAssingnDuties(Integer id);
