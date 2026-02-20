@@ -11,7 +11,7 @@ import java.util.List;
 public class Employee {
     @Id
     @Column(name = "emp_id")
-    private long  id;
+    private int  id;
     @Column(name = "emp_name", nullable = false)
     private  String name;
     @Column(name = "emp_gender",nullable = false)

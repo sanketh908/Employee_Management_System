@@ -22,7 +22,7 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public String registerEmployee(Employee employee) {
-        employee.setAccountstats("pending");
+       Long id=
     }
 
     @Override
@@ -31,7 +31,7 @@ public class EmployeeServiceImp implements EmployeeService{
     }
 
     @Override
-    public Employee findEmployeeById(Long id) {
+    public Employee findEmployeeById(Integer id) {
         return null;
     }
 
@@ -56,12 +56,12 @@ public class EmployeeServiceImp implements EmployeeService{
     }
 
     @Override
-    public String updateAccountStatus(Long id, String status) {
+    public String updateAccountStatus(Integer id, String status) {
         return "";
     }
 
     @Override
-    public List<Duty> viewAssingnDuties(Long id) {
+    public List<Duty> viewAssingnDuties(Integer id) {
         return List.of();
     }
 

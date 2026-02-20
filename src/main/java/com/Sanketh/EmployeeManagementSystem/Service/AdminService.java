@@ -12,12 +12,12 @@ public interface AdminService {
     public String deleteManager(Integer id);
     public List<Employee> getAllEmployees();
 
-    String deleteEmployee(Long id);
+    String deleteEmployee(Integer id);
 
     public long managerCount();
     public long employeeCount();
-    public String assigndutyToManager(Duty duty, Long managerId);
+    public String assigndutyToManager(Duty duty,Integer managerId);
     public List<Leave>getAllLeavesApplication();
-    public String assigndutyToEmployee(Employee employee,Long managerId);
+    public String assigndutyToEmployee(Employee employee,Integer managerId);
 
 }

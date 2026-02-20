@@ -10,13 +10,13 @@ public interface EmployeeService {
     public Employee CheckEmpLogin(String Username, String Password);
     public String registerEmployee(Employee employee);
     public String updateEmployeeProfile(Employee employee);
-    public Employee findEmployeeById(Long id);
+    public Employee findEmployeeById(Integer id);
     public Employee findEmployeeByUsername(String username);
     public Employee findEmployeeByEmail(String email);
     public Employee findEmployeeByPhone(String phone);
     public List<Employee> viewAllEmployees();
-    public String updateAccountStatus(Long id,String status);
-    public List<Duty> viewAssingnDuties(Long id);
+    public String updateAccountStatus(Integer id,String status);
+    public List<Duty> viewAssingnDuties(Integer id);
 
 
     public String generateResetToken(String email);
