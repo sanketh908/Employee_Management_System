@@ -1,10 +1,11 @@
 package com.Sanketh.EmployeeManagementSystem.UtiltyClass;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
-@Service
+@UtilityClass
 public class RandomPasswordGenerator {
 
     //this was a method in the admin class before i made it a utility class
@@ -13,9 +14,7 @@ public class RandomPasswordGenerator {
     static final String number="0123456789";
     static final String spchar="!@#$%^&*()_+";
     static final String combin=upper+lower+number+spchar;
-    private RandomPasswordGenerator() {
-        throw new UnsupportedOperationException("Utility class");
-    }
+
     private String geneateRandomPassword(int lenght) {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
