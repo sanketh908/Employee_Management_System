@@ -3,6 +3,8 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
+import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
+import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +24,10 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public String registerEmployee(Employee employee) {
-       Long id=
+       Integer id= GenaraateRandomId.generateRandomManagerId();
+        employee.setId(id);
+        String password= RandomPasswordGenerator.geneateRandomPassword(8);
+        employee.setPassword(password);
     }
 
     @Override
