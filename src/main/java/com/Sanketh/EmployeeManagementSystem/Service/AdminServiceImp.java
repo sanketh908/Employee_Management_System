@@ -135,26 +135,10 @@ public class AdminServiceImp implements AdminService {
 
     private int generateRandomManagerId()
     {
-        Random random = new Random();
-        return random.nextInt(1000,9999);
+       return 0;
     }
     public String geneateRandomPassword(int lenght)
     {
-      String upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      String lower="abcdefghijklmnopqrstuvwxyz";
-      String number="0123456789";
-      String spchar="!@#$%^&*()_+";
-      String combin=upper+lower+number+spchar;
-      StringBuilder stringBuilder=new StringBuilder();
-      Random random=new Random();
-      stringBuilder.append(upper.charAt(random.nextInt(upper.length())));
-      stringBuilder.append(lower.charAt(random.nextInt(lower.length())));
-      stringBuilder.append(number.charAt(random.nextInt(number.length())));
-      stringBuilder.append(spchar.charAt(random.nextInt(spchar.length())));
-      for(int i=4;i<lenght;i++)
-      {
-          stringBuilder.append(combin.charAt(random.nextInt(combin.length())));
-      }
-      return stringBuilder.toString();
+      return "";
     }
 }
