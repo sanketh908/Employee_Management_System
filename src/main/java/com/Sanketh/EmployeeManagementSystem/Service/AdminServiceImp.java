@@ -5,6 +5,8 @@ import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
+import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
+import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,9 +44,9 @@ public class AdminServiceImp implements AdminService {
     @Override
     public Manager addManager(Manager manager)
     {
-        int managerId = generateRandomManagerId();
+        int managerId = GenaraateRandomId.generateRandomManagerId();
         manager.setId(managerId);
-        String randomPassword = geneateRandomPassword(8);
+        String randomPassword = RandomPasswordGenerator.geneateRandomPassword(8);
         manager.setPassword(randomPassword);
         Manager savedmanager =managerRepository.save(manager);
         String subject="Welcome Manager to Employee Management System";
