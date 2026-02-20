@@ -145,10 +145,20 @@ public class ManagerServiceImp implements ManagerService{
     public void updatePassword(String token, String newPassword) {
        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
        if (resetToken.isPresent() && !isTokenExpired(token)) {
-          Manager manager=new Manager();
-          manager.setPassword(newPassword);
-          managerRepository.save(manager);
-          deleteResetToken(token);
+           String email=resetToken.get().getEmail();
+           Optional<Manager> manager=managerRepository.findByEmail(email);
+           if(manager.isPresent()){
+            Manager manager1=manager.get();
+            manager1.setPassword(newPassword);
+            managerRepository.save(manager1);
+            deleteResetToken(token);
+           }
+           else
+               {
+               log.info("Reset token not found");
+               }
+
+
 
        }
     }
