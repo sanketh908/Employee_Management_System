@@ -2,19 +2,23 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
+import com.Sanketh.EmployeeManagementSystem.Repository.DutyRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImp implements EmployeeService{
     private final  EmployeeRepository employeeRepository;
+    private final DutyRepository dutyRepository;
 
-    public EmployeeServiceImp(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImp(EmployeeRepository employeeRepository, DutyRepository dutyRepository) {
         this.employeeRepository = employeeRepository;
+        this.dutyRepository = dutyRepository;
     }
 
     @Override
@@ -60,17 +64,28 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public List<Employee> viewAllEmployees() {
-        return List.of();
+
+        return  employeeRepository.findAll();
     }
 
     @Override
     public String updateAccountStatus(Integer id, String status) {
-        return "";
+
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if(employee.isPresent()){
+            employee.get().setAccountstats(status);
+            employeeRepository.save(employee.get());
+            return "Status updated to "+status;
+        }
+        return "Employee profile not found";
     }
 
     @Override
     public List<Duty> viewAssingnDuties(Integer id) {
-        return List.of();
+        Optional <Employee> employee = employeeRepository.findById(id);
+        if(employee.isPresent()){
+            return dutyRepository.
+        }
     }
 
     @Override
