@@ -65,7 +65,8 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public Employee findEmployeeByEmail(String email) {
-        return employeeRepository.findByEmail(email);
+        Optional<Employee> employee = employeeRepository.findByEmail(email);
+        return employee.orElse(null);
     }
 
 
@@ -116,17 +117,41 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public boolean validateResetToken(String token) {
-
+        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+        return resetToken.isPresent() && !isTokenExpired(token);
     }
 
     @Override
     public boolean changePassword(Employee employee, String oldPassword, String newPassword) {
+
+        if(employee.getPassword().equals(oldPassword)){
+            employee.setPassword(newPassword);
+            employeeRepository.save(employee);
+            return true;
+        }
         return false;
     }
 
     @Override
     public void updatePassword(String token, String newPassword) {
+        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+        if (resetToken.isPresent() && !isTokenExpired(token)) {
+            String email=resetToken.get().getEmail();
+            Optional<Manager> manager=employeeRepository.findByEmail(email);
+            if(manager.isPresent()){
+                Manager manager1=manager.get();
+                manager1.setPassword(newPassword);
+                managerRepository.save(manager1);
+                deleteResetToken(token);
+            }
+            else
+            {
+                log.info("Reset token not found");
+            }
 
+
+
+        }
     }
 
     @Override
