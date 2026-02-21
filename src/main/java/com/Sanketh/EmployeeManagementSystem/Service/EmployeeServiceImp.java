@@ -2,24 +2,31 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
+import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
+import com.Sanketh.EmployeeManagementSystem.Entity.ResetToken;
 import com.Sanketh.EmployeeManagementSystem.Repository.DutyRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.ResetTokenRepository;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EmployeeServiceImp implements EmployeeService{
     private final  EmployeeRepository employeeRepository;
     private final DutyRepository dutyRepository;
+    private final ResetTokenRepository resetTokenRepository;
 
-    public EmployeeServiceImp(EmployeeRepository employeeRepository, DutyRepository dutyRepository) {
+    public EmployeeServiceImp(EmployeeRepository employeeRepository, DutyRepository dutyRepository, ResetTokenRepository resetTokenRepository) {
         this.employeeRepository = employeeRepository;
         this.dutyRepository = dutyRepository;
+        this.resetTokenRepository = resetTokenRepository;
     }
 
     @Override
@@ -92,13 +99,24 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public String generateResetToken(String email) {
-
+        Employee employee= employeeRepository.findByEmail(email);
+        if(employee!=null){
+            String token= UUID.randomUUID().toString();
+            ResetToken resetToken=new ResetToken();
+            resetToken.setToken(token);
+            resetToken.setEmail(email);
+            resetToken.setIssuedAt(LocalDateTime.now());
+            resetToken.setExpiresAt(LocalDateTime.now().plusMinutes(5));
+            resetTokenRepository.save(resetToken);
+            return token;
+        }
+        return null ;
 
     }
 
     @Override
     public boolean validateResetToken(String token) {
-        return false;
+
     }
 
     @Override
