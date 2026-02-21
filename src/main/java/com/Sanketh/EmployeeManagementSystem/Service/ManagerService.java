@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface ManagerService {
     public Manager checkManagerlogin(String username, String password);
-    public Manager findManagerByid(int id);
+    public Manager findManagerByid(Integer id);
     public Manager findManagerByUsername(String username);
     public Manager findManagerByEmail(String email);
     public List<Manager> viewAllManagers();
     public List<Employee> viewAllEmployees();
-    public String updateEmployeeAccountStatus(Long  id,String status);
+    public String updateEmployeeAccountStatus(Integer id,String status);
     public String generateResetToken(String email);
     public boolean validateResetToken(String token);
     public boolean changePassword(Manager manager,String oldPassword,String newPassword);

@@ -43,7 +43,7 @@ public class ManagerServiceImp implements ManagerService{
     }
 
     @Override
-    public Manager findManagerByid(int id) {
+    public Manager findManagerByid(Integer id) {
         Optional<Manager> manager= managerRepository.findById(id);
         if(manager.isPresent()){
             return manager.get();
@@ -91,11 +91,9 @@ public class ManagerServiceImp implements ManagerService{
         return employeeRepository.findAll();
     }
 
-
-
     @Override
-    public String updateEmployeeAccountStatus(Long id, String status) {
-       Optional<Employee> employee=employeeRepository.findById(id);
+    public String updateEmployeeAccountStatus(Integer id, String status) {
+        Optional<Employee> employee=employeeRepository.findById(id);
         if(employee.isPresent()){
             Employee emp=employee.get();
             emp.setAccountstats(status);
@@ -107,6 +105,7 @@ public class ManagerServiceImp implements ManagerService{
             return "employee account status not found";
         }
     }
+
 
     @Override
     public String generateResetToken(String email) {

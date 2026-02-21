@@ -8,6 +8,7 @@ import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,13 +85,15 @@ public class EmployeeServiceImp implements EmployeeService{
     public List<Duty> viewAssingnDuties(Integer id) {
         Optional <Employee> employee = employeeRepository.findById(id);
         if(employee.isPresent()){
-            return dutyRepository.
+            return dutyRepository.findByEmployee(employee.get());
         }
+        return Collections.emptyList();
     }
 
     @Override
     public String generateResetToken(String email) {
-        return "";
+
+
     }
 
     @Override
