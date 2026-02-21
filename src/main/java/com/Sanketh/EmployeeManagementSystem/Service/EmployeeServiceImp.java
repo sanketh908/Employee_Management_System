@@ -9,6 +9,7 @@ import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ResetTokenRepository;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Slf4j
 @Service
 public class EmployeeServiceImp implements EmployeeService{
     private final  EmployeeRepository employeeRepository;
@@ -100,8 +101,8 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public String generateResetToken(String email) {
-        Employee employee= employeeRepository.findByEmail(email);
-        if(employee!=null){
+        Optional<Employee> employee= employeeRepository.findByEmail(email);
+        if(employee.isPresent()){
             String token= UUID.randomUUID().toString();
             ResetToken resetToken=new ResetToken();
             resetToken.setToken(token);
@@ -137,11 +138,11 @@ public class EmployeeServiceImp implements EmployeeService{
         Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
         if (resetToken.isPresent() && !isTokenExpired(token)) {
             String email=resetToken.get().getEmail();
-            Optional<Manager> manager=employeeRepository.findByEmail(email);
-            if(manager.isPresent()){
-                Manager manager1=manager.get();
-                manager1.setPassword(newPassword);
-                managerRepository.save(manager1);
+            Optional<Employee> employee=employeeRepository.findByEmail(email);
+            if(employee.isPresent()){
+                Employee Emp=employee.get();
+                Emp.setPassword(newPassword);
+                employeeRepository.save(Emp);
                 deleteResetToken(token);
             }
             else
@@ -156,11 +157,12 @@ public class EmployeeServiceImp implements EmployeeService{
 
     @Override
     public void deleteResetToken(String token) {
-
+        resetTokenRepository.deleteByToken(token);
     }
 
     @Override
     public boolean isTokenExpired(String token) {
-        return false;
+        Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
+        return resetToken.map(value -> value.getExpiresAt().isBefore(LocalDateTime.now())).orElse(true);
     }
 }

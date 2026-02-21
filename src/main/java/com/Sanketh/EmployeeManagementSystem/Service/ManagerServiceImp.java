@@ -170,9 +170,6 @@ public class ManagerServiceImp implements ManagerService{
     @Override
     public boolean isTokenExpired(String token) {
         Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
-        if(resetToken.isPresent()){
-            return resetToken.get().getExpiresAt().isBefore(LocalDateTime.now());
-        }
-        return true;
+        return resetToken.map(value -> value.getExpiresAt().isBefore(LocalDateTime.now())).orElse(true);
     }
 }
