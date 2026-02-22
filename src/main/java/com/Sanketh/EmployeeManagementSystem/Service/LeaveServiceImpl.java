@@ -69,6 +69,14 @@ public class LeaveServiceImpl  implements  LeaveService {
 
     @Override
     public String updateLeaveStatus(Integer leaveId, String status) {
-        return "";
+          Optional<Leave> leave = leaveRepository.findById(leaveId);
+          if (leave.isPresent()) {
+                Leave existingLeave = leave.get();
+                existingLeave.setStatus(status);
+                leaveRepository.save(existingLeave);
+                return "Leave status updated successfully.";
+            } else {
+                return "Leave not found.";
+          }
+        }
     }
-}

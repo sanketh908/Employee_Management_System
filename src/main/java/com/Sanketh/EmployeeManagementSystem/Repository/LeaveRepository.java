@@ -10,4 +10,5 @@ import java.util.List;
 public interface LeaveRepository extends JpaRepository<Leave,Integer> {
     List<Leave> findByEmployeeId(Integer id);
     List<Leave> findByStatusIgnoreCase(String status);
+    List<Leave> findByManagerId(Integer id);
 }

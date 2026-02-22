@@ -8,7 +8,7 @@ import java.util.Random;
 @UtilityClass
 public class RandomPasswordGenerator {
 
-    //this was a method in the admin class before i made it a utility class
+    //this was a method in the admin class before I made it a utility class
     static final String  upper ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     static final String lower="abcdefghijklmnopqrstuvwxyz";
     static final String number="0123456789";
