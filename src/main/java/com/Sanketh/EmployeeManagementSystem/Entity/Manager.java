@@ -11,7 +11,7 @@ public class Manager {
     @Id
     private int id;
     @Column(name = "manager_name",nullable = false)
-    private String Username;
+    private String username;
     @Column(name = "manager_email",nullable = false,unique = true)
     private String email;
     @Column(name = "manager_password",nullable = false,unique = true)
@@ -25,7 +25,7 @@ public class Manager {
 
     @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
     private List<Employee> employees;
-    @OneToMany(mappedBy = "assiendbymanager",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assiendByManager",cascade = CascadeType.ALL)
     private List<Duty> DutysAssined;
 
 }
