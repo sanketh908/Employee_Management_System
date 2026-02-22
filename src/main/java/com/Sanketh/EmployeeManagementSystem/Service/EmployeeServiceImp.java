@@ -2,7 +2,6 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
-import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Entity.ResetToken;
 import com.Sanketh.EmployeeManagementSystem.Repository.DutyRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
@@ -119,7 +118,7 @@ public class EmployeeServiceImp implements EmployeeService{
     @Override
     public boolean validateResetToken(String token) {
         Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
-        return resetToken.isPresent() && !isTokenExpired(token);
+        return resetToken.isPresent() && isTokenExpired(token);
     }
 
     @Override
@@ -136,7 +135,7 @@ public class EmployeeServiceImp implements EmployeeService{
     @Override
     public void updatePassword(String token, String newPassword) {
         Optional<ResetToken> resetToken=resetTokenRepository.findByToken(token);
-        if (resetToken.isPresent() && !isTokenExpired(token)) {
+        if (resetToken.isPresent() && isTokenExpired(token)) {
             String email=resetToken.get().getEmail();
             Optional<Employee> employee=employeeRepository.findByEmail(email);
             if(employee.isPresent()){

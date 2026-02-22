@@ -2,7 +2,7 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
-import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
+
 
 import java.util.List;
 
