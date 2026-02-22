@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
 @Service
-public class AdminServiceImp implements AdminService {
+public class AdminServiceImpl implements AdminService {
     private final AdminRepository adminRepository;
     private final  ManagerRepository managerRepository;
     private  final EmailService emailService;
     private  final EmployeeRepository employeeRepository;
     private final LeaveRepository leaveRepository;
-    public AdminServiceImp(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository, LeaveRepository leaveRepository) {
+    public AdminServiceImpl(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository, LeaveRepository leaveRepository) {
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
         this.emailService = emailService;

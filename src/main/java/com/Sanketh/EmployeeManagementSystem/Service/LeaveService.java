@@ -9,5 +9,7 @@ public interface LeaveService {
     public List<Leave> viewLeaveStatusByEmployee(Integer id);
     public List<Leave> ViewAllPendingLeave();
     public Leave ApplyLaveByManager(Leave leave,Integer managerId);
-    piblic List
+    public  List<Leave> ViweAllLeaveByManager(Integer managerId);
+    public String updateLeaveStatus(Integer leaveId,String status);
+
 }

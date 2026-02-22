@@ -16,13 +16,13 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class ManagerServiceImp implements ManagerService{
+public class ManagerServiceImpl implements ManagerService{
     private final ManagerRepository managerRepository;
     private final EmployeeRepository employeeRepository;
     private final ResetTokenRepository resetTokenRepository;
 
 
-    public ManagerServiceImp(ManagerRepository managerRepository, EmployeeRepository employeeRepository, ResetTokenRepository resetTokenRepository) {
+    public ManagerServiceImpl(ManagerRepository managerRepository, EmployeeRepository employeeRepository, ResetTokenRepository resetTokenRepository) {
         this.managerRepository = managerRepository;
         this.employeeRepository = employeeRepository;
         this.resetTokenRepository = resetTokenRepository;

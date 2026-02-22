@@ -18,12 +18,12 @@ import java.util.Optional;
 import java.util.UUID;
 @Slf4j
 @Service
-public class EmployeeServiceImp implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService{
     private final  EmployeeRepository employeeRepository;
     private final DutyRepository dutyRepository;
     private final ResetTokenRepository resetTokenRepository;
 
-    public EmployeeServiceImp(EmployeeRepository employeeRepository, DutyRepository dutyRepository, ResetTokenRepository resetTokenRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DutyRepository dutyRepository, ResetTokenRepository resetTokenRepository) {
         this.employeeRepository = employeeRepository;
         this.dutyRepository = dutyRepository;
         this.resetTokenRepository = resetTokenRepository;
