@@ -2,6 +2,7 @@ package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
+import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
@@ -32,24 +33,39 @@ public class LeaveServiceImpl  implements  LeaveService {
     }
 
     @Override
-    public List<Leave> viewLeaveStatusByEmployee(Integer id) {
+    public List<Leave> viewLeaveByEmployee(Integer id) {
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if (employee.isPresent()) {
+            return leaveRepository.findByEmployeeId(employee.get().getId());
+        }
         return List.of();
     }
 
     @Override
     public List<Leave> ViewAllPendingLeave() {
-        return List.of();
+        return leaveRepository.findByStatusIgnoreCase("Pending");
     }
 
     @Override
-    public Leave ApplyLaveByManager(Leave leave, Integer managerId) {
+    public Leave applyLaveByManager(Leave leave, Integer managerId) {
+        Optional<Manager> manager = managerRepository.findById(managerId);
+        if (manager.isPresent()) {
+            leave.setManager(manager.get());
+            leave.setStatus("Pending");
+            return leaveRepository.save(leave);
+        }
         return null;
     }
 
     @Override
-    public List<Leave> ViweAllLeaveByManager(Integer managerId) {
+    public List<Leave> viewLeavesByManager(Integer managerId) {
+        Optional<Manager> manager = managerRepository.findById(managerId);
+        if (manager.isPresent()) {
+            return leaveRepository.findByManagerId(manager.get().getId());
+        }
         return List.of();
     }
+
 
     @Override
     public String updateLeaveStatus(Integer leaveId, String status) {

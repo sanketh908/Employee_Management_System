@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface LeaveService {
     public Leave applyLeaveByEmployee(Leave leave, Integer id);
-    public List<Leave> viewLeaveStatusByEmployee(Integer id);
+    public List<Leave> viewLeaveByEmployee(Integer id);
     public List<Leave> ViewAllPendingLeave();
-    public Leave ApplyLaveByManager(Leave leave,Integer managerId);
-    public  List<Leave> ViweAllLeaveByManager(Integer managerId);
+    public Leave applyLaveByManager(Leave leave,Integer managerId);
+    public  List<Leave> viewLeavesByManager(Integer managerId);
     public String updateLeaveStatus(Integer leaveId,String status);
 
 }
