@@ -20,6 +20,8 @@ public class Manager {
     private String department;
     @Column(name="manager_contact",unique = true,nullable = false)
     private String contact;
+    @Column(name = "manager_role",nullable = false)
+    private String role;
 
     @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
     private List<Employee> employees;

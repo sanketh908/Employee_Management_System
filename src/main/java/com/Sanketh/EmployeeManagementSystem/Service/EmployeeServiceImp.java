@@ -106,7 +106,7 @@ public class EmployeeServiceImp implements EmployeeService{
             ResetToken resetToken=new ResetToken();
             resetToken.setToken(token);
             resetToken.setEmail(email);
-            resetToken.setIssuedAt(LocalDateTime.now());
+            resetToken.setCreatedAt(LocalDateTime.now());
             resetToken.setExpiresAt(LocalDateTime.now().plusMinutes(5));
             resetTokenRepository.save(resetToken);
             return token;
