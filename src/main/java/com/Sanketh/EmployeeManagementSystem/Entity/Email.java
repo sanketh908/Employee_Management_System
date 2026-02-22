@@ -8,13 +8,14 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Slf4j
+@Table(name = "email_table")
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
     private String recipient;
+    @Column(nullable = false)
     private String subject;
     @Column(nullable = false, length = 1000)
     private String massage;

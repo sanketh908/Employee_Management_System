@@ -20,13 +20,16 @@ public class Duty {
     @ManyToOne
     @JoinColumn(name = "emp_id")
     private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "Manager_id")
+    private Manager manager;
 
     @ManyToOne
-    @JoinColumn(name = "assiendbymanager")
-    private Manager assiendbymanager;
+    @JoinColumn(name = "assiendByManager")
+    private Manager assiendByManager;
 
     @ManyToOne
-    @JoinColumn(name = "assiendbyadmin")
-    private Admin assiendbyadmin;
+    @JoinColumn(name = "assienByAdmin")
+    private Admin assiendByAdmin;
 }
 

@@ -16,5 +16,7 @@ public class Admin {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
+    private String role;
 
 }

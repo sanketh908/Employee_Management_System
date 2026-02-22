@@ -22,6 +22,8 @@ public class Employee {
     private double salary;
     @Column(name = "emp_dept",nullable = false)
     private String department;
+    @Column(name = "emp_designation",nullable = false)
+    private String designation;
     @Column(name = "emp_username",nullable = false,unique = true)
     public  String username;
     @Column(name = "emp_email",nullable = false,unique = true)
@@ -32,6 +34,8 @@ public class Employee {
     private String accountstats;
     @Column(name = "emp_role",nullable = false)
     private String role;
+    @Column(nullable = false,name = "emp_profile_picture",columnDefinition = "LONGBLOB")
+    private byte[] profilePicture;
 
 
     @ManyToOne
