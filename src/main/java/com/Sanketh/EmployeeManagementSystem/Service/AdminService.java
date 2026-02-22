@@ -8,7 +8,7 @@ public interface AdminService {
     public Admin checkAdminlogin(String username, String password);
     public Manager addManager(Manager manager);
     public Manager checkManagerlogin(String username, String password);
-    public List<Manager> getAllManagers();
+    public List<Manager> viewAllManagers();
     public String deleteManager(Integer id);
     public List<Employee> getAllEmployees();
 

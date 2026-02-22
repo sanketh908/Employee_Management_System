@@ -68,7 +68,7 @@ public class AdminServiceImp implements AdminService {
     }
 
     @Override
-    public List<Manager> getAllManagers(){
+    public List<Manager> viewAllManagers(){
         return managerRepository.findAll();
     }
     @Override
