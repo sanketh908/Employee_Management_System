@@ -12,4 +12,6 @@ public interface DutyRepository extends JpaRepository<Duty,Integer> {
     List<Duty> findByEmployee(Employee employee);
     List<Duty> findByManagerId(Integer managerId);
     List<Duty> findByEmployeeId(Integer employeeId);
+    List<Duty> findByAssignedByAdmin(Integer adminId);
+    List<Duty> findByAssignedByManager(Integer managerId);
 }

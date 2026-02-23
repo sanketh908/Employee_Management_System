@@ -73,11 +73,11 @@ public class DutyServiceImpl implements  DutyService {
 
     @Override
     public List<Duty> viewDutiesAssignedByAdmin(Integer adminId) {
-        return List.of();
+        return dutyRepository.findByAssignedByAdmin(adminId);
     }
 
     @Override
     public List<Duty> viewDutiesAssignedByManager(Integer managerId) {
-        return List.of();
+        return dutyRepository.findByAssignedByManager(managerId);
     }
 }
