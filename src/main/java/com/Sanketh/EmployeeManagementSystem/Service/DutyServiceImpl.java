@@ -51,17 +51,24 @@ public class DutyServiceImpl implements  DutyService {
 
     @Override
     public Duty assignDutyByManagerToEmployee(Duty duty, Integer employeeId, Integer managerId) {
+        Optional<Employee> employee = employeeRepository.findById(employeeId);
+        Optional<Manager> manager = managerRepository.findById(managerId);
+        if (employee.isPresent() && manager.isPresent()) {
+            duty.setEmployee(employee.get());
+            duty.setAssiendByManager(manager.get());
+            return dutyRepository.save(duty);
+        }
         return null;
     }
 
     @Override
     public List<Duty> viewAllDutyofManager(Integer managerId) {
-        return List.of();
+        return dutyRepository.findByManagerId(managerId);
     }
 
     @Override
     public List<Duty> viewAllDutyofEmployee(Integer employeeId) {
-        return List.of();
+        return dutyRepository.findByEmployeeId(employeeId);
     }
 
     @Override
