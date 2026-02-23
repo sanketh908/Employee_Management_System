@@ -6,10 +6,11 @@ import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class LeaveServiceImpl  implements  LeaveService {
     private final LeaveRepository leaveRepository;
     private  final EmployeeRepository employeeRepository;
