@@ -10,6 +10,7 @@ public interface DutyService {
     public Duty assignDutyByManagerToEmployee(Duty duty, Integer employeeId,Integer managerId);
     public List<Duty> viewAllDutyofManager(Integer managerId);
     public List<Duty> viewAllDutyofEmployee(Integer employeeId);
-
+    public List<Duty> viewDutiesAssignedByAdmin(Integer adminId);
+    public List<Duty> viewDutiesAssignedByManager(Integer managerId);
 
 }
