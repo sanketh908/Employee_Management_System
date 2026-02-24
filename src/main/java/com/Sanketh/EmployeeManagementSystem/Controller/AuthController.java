@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth/api")
+@CrossOrigin("*")
 public class AuthController {
     private final AdminServiceImpl adminService;
     private final EmployeeServiceImpl employeeService;
