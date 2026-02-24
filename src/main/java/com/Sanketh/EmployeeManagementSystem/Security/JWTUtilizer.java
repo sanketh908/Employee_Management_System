@@ -38,6 +38,20 @@ public class JWTUtilizer {
                     .setExpiration(new Date(System.currentTimeMillis() + 1000 *60*60*2))
                     .signWith(getKey(), SignatureAlgorithm.HS256).compact();
         }
+        public boolean validateToken(String token){
+            Map<String,Object> claims=new HashMap<>();
+            try{
+                Jwts
+                        .parserBuilder()
+                        .setSigningKey(getKey())
+                        .build()
+                        .parseClaimsJws(token)
+                .getBody();
+
+            }catch (Exception e){
+                return false;
+            }
+        }
 
 }
 
