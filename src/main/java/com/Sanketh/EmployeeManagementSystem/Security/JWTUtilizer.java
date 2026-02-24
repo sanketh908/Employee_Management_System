@@ -1,5 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -38,19 +40,24 @@ public class JWTUtilizer {
                     .setExpiration(new Date(System.currentTimeMillis() + 1000 *60*60*2))
                     .signWith(getKey(), SignatureAlgorithm.HS256).compact();
         }
-        public boolean validateToken(String token){
-            Map<String,Object> claims=new HashMap<>();
+        public Map<String,String> validateToken(String token){
+            Map<String,String> res=new HashMap<>();
             try{
-                Jwts
+               Claims claims= Jwts
                         .parserBuilder()
                         .setSigningKey(getKey())
                         .build()
                         .parseClaimsJws(token)
                 .getBody();
+                res.put("username",claims.get("username",String.class));
+                res.put("role",claims.get("role",String.class));
+                res.put("code","200");
 
-            }catch (Exception e){
-                return false;
+            }catch (ExpiredJwtException e){
+                res.put("code","401");
+                res.put("Error","Token is invalid or expired Login again");
             }
+            return res;
         }
 
 }
