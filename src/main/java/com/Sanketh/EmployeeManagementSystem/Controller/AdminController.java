@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController("/admin")
 @CrossOrigin("*")
 public class AdminController {
@@ -34,11 +36,27 @@ public class AdminController {
 
 
     }
+
     @GetMapping("/viewallmanagers")
-    public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<List<Manager>> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
             new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
-    }
 
+        }
+        return new ResponseEntity<>(adminService.viewAllManagers(), HttpStatus.OK);
+
+
+    }
+    @GetMapping("/viewallemployees")
+    public ResponseEntity<List<Employee>> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+
+        }
+        return new ResponseEntity<>(adminService.getAllEmployees(), HttpStatus.OK);
+
+
+    }
 }
