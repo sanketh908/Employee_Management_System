@@ -36,7 +36,9 @@ public class AdminController {
     }
     @GetMapping("/viewallmanagers")
     public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
-
+        String token = authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
     }
 
 }
