@@ -1,10 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Service;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.*;
-import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
-import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
-import com.Sanketh.EmployeeManagementSystem.Repository.LeaveRepository;
-import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
+import com.Sanketh.EmployeeManagementSystem.Repository.*;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.GenaraateRandomId;
 import com.Sanketh.EmployeeManagementSystem.UtiltyClass.RandomPasswordGenerator;
 import org.springframework.stereotype.Service;
@@ -19,12 +16,14 @@ public class AdminServiceImpl implements AdminService {
     private  final EmailService emailService;
     private  final EmployeeRepository employeeRepository;
     private final LeaveRepository leaveRepository;
-    public AdminServiceImpl(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository, LeaveRepository leaveRepository) {
+    private final DutyRepository dutyRepository;
+    public AdminServiceImpl(AdminRepository adminRepository, ManagerRepository managerRepository, EmailService emailService, EmployeeRepository employeeRepository, LeaveRepository leaveRepository, DutyRepository dutyRepository) {
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
         this.emailService = emailService;
         this.employeeRepository = employeeRepository;
         this.leaveRepository = leaveRepository;
+        this.dutyRepository = dutyRepository;
     }
 
 
@@ -117,11 +116,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public String assigndutyToManager(Duty duty,Integer managerId) {
-        return "";
+    public Duty assigndutyToManager(Duty duty, Integer managerId) {
+      duty.setManager(managerRepository.findById(managerId).orElse(null));
+        return dutyRepository.save(duty);
     }
-
-
 
 
     @Override
@@ -131,8 +129,8 @@ public class AdminServiceImpl implements AdminService {
      }
 
     @Override
-    public String assigndutyToEmployee(Employee employee,Integer managerId) {
-        return "";
+    public Duty assigndutyToEmployee(Employee employee, Integer managerId) {
+        return null;
     }
 
 

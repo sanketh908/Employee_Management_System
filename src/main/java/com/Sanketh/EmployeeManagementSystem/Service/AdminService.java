@@ -16,8 +16,8 @@ public interface AdminService {
 
     public long managerCount();
     public long employeeCount();
-    public String assigndutyToManager(Duty duty,Integer managerId);
+    public Duty assigndutyToManager(Duty duty,Integer managerId);
     public List<Leave>getAllLeavesApplication();
-    public String assigndutyToEmployee(Employee employee,Integer managerId);
+    public Duty assigndutyToEmployee(Employee employee,Integer managerId);
 
 }

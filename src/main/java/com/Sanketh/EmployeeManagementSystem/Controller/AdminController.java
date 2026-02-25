@@ -1,5 +1,6 @@
 package com.Sanketh.EmployeeManagementSystem.Controller;
 
+import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
@@ -58,5 +59,20 @@ public class AdminController {
         return new ResponseEntity<>(adminService.getAllEmployees(), HttpStatus.OK);
 
 
+    }
+    @PutMapping("/assignduty")
+    public ResponseEntity<String> assignDutyToManager(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+
+        }
+        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(token).get("username"), null));
+        Duty assignedDuty = adminService.assigndutyToManager(duty, duty.getManager().getId());
+        if (assignedDuty != null) {
+            return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to assign duty. Please check the manager ID and try again.", HttpStatus.BAD_REQUEST);
+        }
     }
 }
