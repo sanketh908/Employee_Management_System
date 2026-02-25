@@ -63,7 +63,13 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Manager checkManagerlogin(String username, String password) {
-        return null;
+        Optional<Manager> manager= managerRepository.findByUsernameAndPassword(username,password);
+        if(manager.isPresent()){
+            return manager.get();
+        }else
+        {
+            return null;
+        }
     }
 
     @Override
