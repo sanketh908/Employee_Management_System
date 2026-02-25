@@ -18,6 +18,6 @@ public interface AdminService {
     public long employeeCount();
     public Duty assigndutyToManager(Duty duty,Integer managerId);
     public List<Leave>getAllLeavesApplication();
-    public Duty assigndutyToEmployee(Employee employee,Integer managerId);
+    public Duty assigndutyToEmployee(Duty duty,Employee employee,Integer managerId);
 
 }

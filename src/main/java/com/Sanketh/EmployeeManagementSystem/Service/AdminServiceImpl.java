@@ -129,8 +129,11 @@ public class AdminServiceImpl implements AdminService {
      }
 
     @Override
-    public Duty assigndutyToEmployee(Employee employee, Integer managerId) {
-        return null;
+    public Duty assigndutyToEmployee(Duty duty,Employee employee, Integer managerId) {
+        duty.setManager(managerRepository.findById(managerId).orElse(null));
+        duty.setEmployee(employee);
+        duty.setAssiendByManager(managerRepository.findById(managerId).orElse(null));
+        return dutyRepository.save(duty);
     }
 
 
