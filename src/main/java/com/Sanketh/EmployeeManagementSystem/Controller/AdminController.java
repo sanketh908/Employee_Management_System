@@ -5,6 +5,7 @@ import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.AdminService;
+import com.Sanketh.EmployeeManagementSystem.Service.ManagerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +17,14 @@ import java.util.List;
 public class AdminController {
     private final JWTUtilizer jwtUtilizer;
     private final AdminService adminService;
+    private final ManagerService  managerService;
 
 
-    public AdminController(JWTUtilizer jwtUtilizer, AdminService adminService) {
+    public AdminController(JWTUtilizer jwtUtilizer, AdminService adminService, ManagerService managerService) {
         this.jwtUtilizer = jwtUtilizer;
 
         this.adminService = adminService;
+        this.managerService = managerService;
     }
 
     @PostMapping("/addmanager")
@@ -74,5 +77,16 @@ public class AdminController {
         } else {
             return new ResponseEntity<>("Failed to assign duty. Please check the manager ID and try again.", HttpStatus.BAD_REQUEST);
         }
+    }
+    @PutMapping("/update")
+    public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empid, @RequestHeader("Authorization") String authHeader,@RequestParam String stuts) {
+        String token =authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+
+        }
+       String meassage= managerService.updateEmployeeAccountStatus(empid,stuts.toUpperCase());
+        return new ResponseEntity<>(meassage, HttpStatus.OK);
+
     }
 }
