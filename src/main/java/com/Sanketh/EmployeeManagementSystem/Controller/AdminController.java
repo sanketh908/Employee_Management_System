@@ -1,7 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Controller;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
-import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
+import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.AdminService;
@@ -31,7 +31,7 @@ public class AdminController {
     public ResponseEntity<?> addManager(@RequestBody Manager manager, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
 
 
@@ -42,10 +42,10 @@ public class AdminController {
     }
 
     @GetMapping("/viewallmanagers")
-    public ResponseEntity<List<Manager>> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {//hear I put wildcard pattern because this methode can return a list of managers or string
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+           return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
         return new ResponseEntity<>(adminService.viewAllManagers(), HttpStatus.OK);
@@ -53,10 +53,10 @@ public class AdminController {
 
     }
     @GetMapping("/viewallemployees")
-    public ResponseEntity<List<Employee>> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {//hear I put wildcard pattern because this methode can return a list of employees or string
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+           return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
         return new ResponseEntity<>(adminService.getAllEmployees(), HttpStatus.OK);
@@ -67,42 +67,70 @@ public class AdminController {
     public ResponseEntity<String> assignDutyToManager(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
         duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(token).get("username"), null));
-        Duty assignedDuty = adminService.assigndutyToManager(duty, duty.getManager().getId());
-        if (assignedDuty != null) {
-            return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to assign duty. Please check the manager ID and try again.", HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
     }
-    @PutMapping("/update")
+    @PutMapping("/updateemployeestutes")
     public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empid, @RequestHeader("Authorization") String authHeader,@RequestParam String stuts) {
         String token =authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+           return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-       String meassage= managerService.updateEmployeeAccountStatus(empid,stuts.toUpperCase());
-        return new ResponseEntity<>(meassage, HttpStatus.OK);
+       String message = managerService.updateEmployeeAccountStatus(empid,stuts.toUpperCase());
+        return new ResponseEntity<>(message, HttpStatus.OK);
 
     }
-    @PutMapping("/assigndutytomanager")
+    @PutMapping("/assigndutytoemployee")
     public ResponseEntity<String> assignDutyToEmployee(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
-            new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+           return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
         duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(token).get("username"), null));
-        Duty assignedDuty = adminService.assigndutyToManager(duty, duty.getManager().getId());
-        if (assignedDuty != null) {
-            return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to assign duty. Please check the manager ID and try again.", HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity<>("Duty assigned successfully to Employee with ID: " + duty.getEmployee().getId(), HttpStatus.OK);
+
     }
+    @GetMapping("/viewallleaveapplications")
+    public ResponseEntity<?>viewAllLeaveApplications(@RequestHeader("Authorization") String authHeader) {
+        String token =authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+        }
+        List<Leave> leaves=adminService.getAllLeavesApplication();
+        return new ResponseEntity<>(leaves, HttpStatus.OK);
+    }
+    @DeleteMapping("/deleteemployee")
+    public ResponseEntity<String> deleteEmployee(@RequestParam int eid,@RequestHeader("Authorization") String authHeader,@RequestParam String empid) {
+        String token =authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges",HttpStatus.FORBIDDEN);
+        }
+        String massage = adminService.deleteEmployee(eid);
+        return   new ResponseEntity<>(massage + eid, HttpStatus.OK);
+    }
+    @GetMapping("/viewmanagerscount")
+    public ResponseEntity<?> viewManagersCount(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+        }
+        long count = adminService.managerCount();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+    @GetMapping("/viewemployeescount")
+    public ResponseEntity<?> viewEmployeesCount(@RequestHeader("Authorization") String authHeader) {
+        String token=authHeader.substring(7);
+        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
+        }
+        long count = adminService.employeeCount();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
 
 }
