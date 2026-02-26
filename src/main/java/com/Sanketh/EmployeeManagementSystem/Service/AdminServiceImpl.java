@@ -31,14 +31,7 @@ public class AdminServiceImpl implements AdminService {
     public Admin checkAdminlogin(String username,String password)
     {
         Optional<Admin> admin= adminRepository.findAdminByUsernameAndPassword(username,password);
-        if(admin.isPresent())
-        {
-            return admin.get();
-        }
-        else
-        {
-            return null;
-        }
+        return admin.orElse(null);
     }
     @Override
     public Manager addManager(Manager manager)
@@ -56,20 +49,12 @@ public class AdminServiceImpl implements AdminService {
                     "\n\nPassword :"+manager.getPassword();
         emailService.sendEmail(manager.getEmail(),subject,body);
         return savedmanager;
-
-
-
     }
 
     @Override
     public Manager checkManagerlogin(String username, String password) {
         Optional<Manager> manager= managerRepository.findByUsernameAndPassword(username,password);
-        if(manager.isPresent()){
-            return manager.get();
-        }else
-        {
-            return null;
-        }
+        return manager.orElse(null);
     }
 
     @Override
@@ -123,6 +108,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Duty assigndutyToManager(Duty duty, Integer managerId) {
+
       duty.setManager(managerRepository.findById(managerId).orElse(null));
         return dutyRepository.save(duty);
     }
@@ -135,10 +121,9 @@ public class AdminServiceImpl implements AdminService {
      }
 
     @Override
-    public Duty assigndutyToEmployee(Duty duty,Employee employee, Integer managerId) {
-        duty.setManager(managerRepository.findById(managerId).orElse(null));
-        duty.setEmployee(employee);
-        duty.setAssiendByManager(managerRepository.findById(managerId).orElse(null));
+    public Duty assigndutyToEmployee(Duty duty, Integer employeeId) {
+        duty.setEmployee(employeeRepository.findById(employeeId).orElse(null));
+
         return dutyRepository.save(duty);
     }
 

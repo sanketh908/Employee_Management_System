@@ -32,8 +32,8 @@ public class AdminController {
 
     @PostMapping("/addmanager")
     public ResponseEntity<?> addManager(@RequestBody Manager manager, @RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
 
@@ -46,8 +46,7 @@ public class AdminController {
 
     @GetMapping("/viewallmanagers")
     public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {//hear I put wildcard pattern because this methode can return a list of managers or string
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
@@ -57,8 +56,8 @@ public class AdminController {
     }
     @GetMapping("/viewallemployees")
     public ResponseEntity<?> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {//hear I put wildcard pattern because this methode can return a list of employees or string
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
@@ -68,40 +67,40 @@ public class AdminController {
     }
     @PutMapping("/assigndutytomanager")
     public ResponseEntity<String> assignDutyToManager(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(token).get("username"), null));
+        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), null));
         return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
     }
     @PutMapping("/updateemployeestutes")
-    public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empid, @RequestHeader("Authorization") String authHeader,@RequestParam String stuts) {
-        String token =authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+    public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empire, @RequestHeader("Authorization") String authHeader, @RequestParam String stuts) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-       String message = managerService.updateEmployeeAccountStatus(empid,stuts.toUpperCase());
+       String message = managerService.updateEmployeeAccountStatus(empire,stuts.toUpperCase());
         return new ResponseEntity<>(message, HttpStatus.OK);
 
     }
     @PutMapping("/assigndutytoemployee")
     public ResponseEntity<String> assignDutyToEmployee(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(token).get("username"), null));
+        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), jwtUtilizer.validateToken(authHeader).get("password")));
         return new ResponseEntity<>("Duty assigned successfully to Employee with ID: " + duty.getEmployee().getId(), HttpStatus.OK);
 
     }
     @GetMapping("/viewallleaveapplications")
     public ResponseEntity<?>viewAllLeaveApplications(@RequestHeader("Authorization") String authHeader) {
-        String token =authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
         List<Leave> leaves=adminService.getAllLeavesApplication();
@@ -109,8 +108,8 @@ public class AdminController {
     }
     @DeleteMapping("/deleteemployee")
     public ResponseEntity<String> deleteEmployee(@RequestParam int eid,@RequestHeader("Authorization") String authHeader,@RequestParam String empid) {
-        String token =authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges",HttpStatus.FORBIDDEN);
         }
         String massage = adminService.deleteEmployee(eid);
@@ -118,8 +117,8 @@ public class AdminController {
     }
     @GetMapping("/viewmanagerscount")
     public ResponseEntity<?> viewManagersCount(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
         long count = adminService.managerCount();
@@ -127,8 +126,8 @@ public class AdminController {
     }
     @GetMapping("/viewemployeescount")
     public ResponseEntity<?> viewEmployeesCount(@RequestHeader("Authorization") String authHeader) {
-        String token=authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token,"Admin")) {
+
+        if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
         long count = adminService.employeeCount();

@@ -12,7 +12,7 @@ public class Duty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "duty_tiyle",nullable = false)
+    @Column(name = "duty_title",nullable = false)
     private String title;
     @Column(name = "duty_description",nullable = false)
     private String description;
