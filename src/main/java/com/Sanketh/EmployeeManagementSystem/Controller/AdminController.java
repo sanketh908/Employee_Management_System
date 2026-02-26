@@ -5,6 +5,7 @@ import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.AdminService;
+import com.Sanketh.EmployeeManagementSystem.Service.IsAuthorized;
 import com.Sanketh.EmployeeManagementSystem.Service.ManagerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,14 @@ import java.util.List;
 @RestController("/admin")
 @CrossOrigin("*")
 public class AdminController {
-    private final JWTUtilizer jwtUtilizer;
+    private final IsAuthorized isAuthorized;
     private final AdminService adminService;
     private final ManagerService  managerService;
 
 
-    public AdminController(JWTUtilizer jwtUtilizer, AdminService adminService, ManagerService managerService) {
-        this.jwtUtilizer = jwtUtilizer;
 
+    public AdminController(IsAuthorized isAuthorized, AdminService adminService, ManagerService managerService) {
+        this.isAuthorized = isAuthorized;
         this.adminService = adminService;
         this.managerService = managerService;
     }
@@ -30,7 +31,7 @@ public class AdminController {
     @PostMapping("/addmanager")
     public ResponseEntity<?> addManager(@RequestBody Manager manager, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
-        if (!jwtUtilizer.validateToken(token).get("role").equalsIgnoreCase("Admin")) {
+        if (!isAuthorized.isAuthorized(token,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
         }
 
