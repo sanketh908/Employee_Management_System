@@ -1,5 +1,6 @@
 package com.Sanketh.EmployeeManagementSystem.Service;
 
+import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Entity.ResetToken;
@@ -121,6 +122,11 @@ public class ManagerServiceImpl implements ManagerService{
             return token;
         }
         return null ;
+    }
+
+    @Override
+    public List<Duty> viewAssingnDuties(Integer id) {
+        return List.of();
     }
 
     @Override

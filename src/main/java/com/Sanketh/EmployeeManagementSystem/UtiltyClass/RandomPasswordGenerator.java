@@ -15,7 +15,7 @@ public class RandomPasswordGenerator {
     static final String spchar="!@#$%^&*()_+";
     static final String combin=upper+lower+number+spchar;
 
-    public String geneateRandomPassword(int lenght) {
+    public static String geneateRandomPassword(int lenght) {
         StringBuilder stringBuilder = new StringBuilder();
         Random random = new Random();
         stringBuilder.append(upper.charAt(random.nextInt(upper.length())));

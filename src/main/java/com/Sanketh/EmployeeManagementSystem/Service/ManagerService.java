@@ -1,5 +1,6 @@
 package com.Sanketh.EmployeeManagementSystem.Service;
 
+import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 
@@ -14,6 +15,7 @@ public interface ManagerService {
     public List<Employee> viewAllEmployees();
     public String updateEmployeeAccountStatus(Integer id,String status);
     public String generateResetToken(String email);
+    public List<Duty> viewAssingnDuties(Integer id);
     public boolean validateResetToken(String token);
     public boolean changePassword(Manager manager,String oldPassword,String newPassword);
     public void updatePassword(String token,String newPassword);
