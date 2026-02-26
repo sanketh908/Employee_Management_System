@@ -130,6 +130,9 @@ public class AdminController {
         }
         long count = adminService.employeeCount();
         return new ResponseEntity<>(count, HttpStatus.OK);
+
+
+
     }
 
 
