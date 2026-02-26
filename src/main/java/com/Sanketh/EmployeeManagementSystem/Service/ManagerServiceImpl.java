@@ -4,6 +4,7 @@ import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
 import com.Sanketh.EmployeeManagementSystem.Entity.Manager;
 import com.Sanketh.EmployeeManagementSystem.Entity.ResetToken;
+import com.Sanketh.EmployeeManagementSystem.Repository.DutyRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ResetTokenRepository;
@@ -22,12 +23,15 @@ public class ManagerServiceImpl implements ManagerService{
     private final EmployeeRepository employeeRepository;
     private final ResetTokenRepository resetTokenRepository;
 
+    private final DutyRepository dutyRepository;
 
-    public ManagerServiceImpl(ManagerRepository managerRepository, EmployeeRepository employeeRepository, ResetTokenRepository resetTokenRepository) {
+
+    public ManagerServiceImpl(ManagerRepository managerRepository, EmployeeRepository employeeRepository, ResetTokenRepository resetTokenRepository, DutyRepository dutyRepository) {
         this.managerRepository = managerRepository;
         this.employeeRepository = employeeRepository;
         this.resetTokenRepository = resetTokenRepository;
 
+        this.dutyRepository = dutyRepository;
     }
 
     @Override
@@ -126,7 +130,16 @@ public class ManagerServiceImpl implements ManagerService{
 
     @Override
     public List<Duty> viewAssingnDuties(Integer id) {
-        return List.of();
+        Optional<Manager> manager=managerRepository.findById(id);
+        if(manager.isPresent()){
+           Manager manager1=manager.get();
+           return dutyRepository.findByManagerId(manager1.getId());
+        }
+        else
+        {
+            log.info("Manager not found");
+            return null;
+        }
     }
 
     @Override

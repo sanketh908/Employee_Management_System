@@ -29,10 +29,11 @@ public class JWTUtilizer {
         {
                 return  Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey));
          }
-        public String generateJWTTokens(String username, String role){
+        public String generateJWTTokens(String username, String role,Integer id){
             Map<String,Object> claims=new HashMap<>();
             claims.put("username",username);
             claims.put("role",role);
+            claims.put("id",id);
             return Jwts.builder()
                     .setClaims(claims)
                     .setSubject(username)

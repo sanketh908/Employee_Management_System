@@ -44,7 +44,7 @@ public class AuthController {
         Manager manager = managerService.checkManagerlogin(identifier, Password);
         Employee employee = employeeService.CheckEmpLogin(identifier, Password);
         if (admin != null) {
-            String token = jwtUtilizer.generateJWTTokens(admin.getUsername(), "ADMIN");
+            String token = jwtUtilizer.generateJWTTokens(admin.getUsername(), "ADMIN",admin.getId());
             Map<String, Object> res = new HashMap<>();
             res.put("role", "ADMIN");
             res.put("massage", "Admin login successful");
@@ -54,7 +54,7 @@ public class AuthController {
             return new ResponseEntity<>(res, HttpStatus.OK);
         }
             if (manager != null) {
-                String token = jwtUtilizer.generateJWTTokens(manager.getUsername(), "MANAGER");
+                String token = jwtUtilizer.generateJWTTokens(manager.getUsername(), "MANAGER",manager.getId());
                 Map<String, Object> res = new HashMap<>();
                 res.put("role", "MANAGER");
                 res.put("massage", "Manager login successful");
