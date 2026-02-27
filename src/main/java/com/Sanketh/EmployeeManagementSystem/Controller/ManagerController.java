@@ -104,4 +104,13 @@ public class ManagerController {
         dutyService.assignDutyByManagerToEmployee(duty, empId, managerId);
         return new ResponseEntity<>("Duty assigned successfully to Employee with ID: " + empId, HttpStatus.OK);
     }
+    @PutMapping("/viewassignedduties")
+    public ResponseEntity<?> viewAssignedDuties(@RequestHeader("Authorization") String authHeader, @RequestParam Integer managerId) {
+        if (!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase())) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        List<Duty> res = managerService.viewAssingnDuties(managerId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }
