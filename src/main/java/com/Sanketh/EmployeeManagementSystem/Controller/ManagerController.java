@@ -33,13 +33,15 @@ public class ManagerController {
     }
 
     @GetMapping("/viewallduties")
-    public ResponseEntity<?> getAllDuty(@RequestHeader("Authorization") String authHeader) {
+    public ResponseEntity<?> getAllDuty(@RequestHeader("Authorization") String authHeader,@RequestParam Integer id) {
         String token = authHeader.substring(7);
         if(!isAuthorized.isAuthorized(token,"manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
-        return new ResponseEntity<>(managerService.viewAssingnDuties(), HttpStatus.OK);
+        List<Duty> duties = managerService.viewAssingnDuties(id);
+        return new ResponseEntity<>(duties, HttpStatus.OK);
     }
+
 
 
 }

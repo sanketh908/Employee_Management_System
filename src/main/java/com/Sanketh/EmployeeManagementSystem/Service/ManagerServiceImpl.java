@@ -48,7 +48,7 @@ public class ManagerServiceImpl implements ManagerService{
     }
 
     @Override
-    public Manager findManagerByid(Integer id) {
+    public Manager findManagerById(Integer id) {
         Optional<Manager> manager= managerRepository.findById(id);
         if(manager.isPresent()){
             return manager.get();

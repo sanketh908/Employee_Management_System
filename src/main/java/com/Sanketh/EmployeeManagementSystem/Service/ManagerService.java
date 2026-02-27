@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ManagerService {
     public Manager checkManagerlogin(String username, String password);
-    public Manager findManagerByid(Integer id);
+    public Manager findManagerById(Integer id);
     public Manager findManagerByUsername(String username);
     public Manager findManagerByEmail(String email);
     public List<Manager> viewAllManagers();
