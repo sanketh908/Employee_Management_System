@@ -33,8 +33,8 @@ public class ManagerController {
 
     @GetMapping("/viewallduties")
     public ResponseEntity<?> getAllDuty(@RequestHeader("Authorization") String authHeader, @RequestParam Integer id) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token, "manager")) {
+
+        if (!isAuthorized.isAuthorized(authHeader, "manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         List<Duty> duties = managerService.viewAssingnDuties(id);
@@ -43,8 +43,8 @@ public class ManagerController {
 
     @GetMapping("/viewallemployees")
     public ResponseEntity<?> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token, "manager")) {
+
+        if (!isAuthorized.isAuthorized(authHeader, "manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(managerService.viewAllEmployees(), HttpStatus.OK);
@@ -53,19 +53,20 @@ public class ManagerController {
     }
     @GetMapping("/viewallmanagers")
     public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token, "manager")) {
+
+        if (!isAuthorized.isAuthorized(authHeader, "manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(managerService.viewAllManagers(), HttpStatus.OK);
     }
     @GetMapping("/updateemployeestatus")
     public ResponseEntity<?> updateEmployeeAccountStatus(@RequestHeader("Authorization") String authHeader, @RequestParam Integer id,@RequestParam String status) {
-        String token = authHeader.substring(7);
-        if (!isAuthorized.isAuthorized(token, "manager")) {
+
+        if (!isAuthorized.isAuthorized(authHeader, "manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         String res = managerService.updateEmployeeAccountStatus(id, status);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+
 }
