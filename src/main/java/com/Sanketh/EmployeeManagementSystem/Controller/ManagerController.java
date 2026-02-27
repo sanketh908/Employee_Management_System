@@ -33,15 +33,31 @@ public class ManagerController {
     }
 
     @GetMapping("/viewallduties")
-    public ResponseEntity<?> getAllDuty(@RequestHeader("Authorization") String authHeader,@RequestParam Integer id) {
+    public ResponseEntity<?> getAllDuty(@RequestHeader("Authorization") String authHeader, @RequestParam Integer id) {
         String token = authHeader.substring(7);
-        if(!isAuthorized.isAuthorized(token,"manager")) {
+        if (!isAuthorized.isAuthorized(token, "manager")) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         List<Duty> duties = managerService.viewAssingnDuties(id);
         return new ResponseEntity<>(duties, HttpStatus.OK);
     }
 
+    @GetMapping("/viewallemployees")
+    public ResponseEntity<?> viewAllEmployee(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        if (!isAuthorized.isAuthorized(token, "manager")) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(managerService.viewAllEmployees(), HttpStatus.OK);
 
 
+    }
+    @GetMapping("/viewallmanagers")
+    public ResponseEntity<?> viewAllManagers(@RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        if (!isAuthorized.isAuthorized(token, "manager")) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<>(managerService.viewAllManagers(), HttpStatus.OK);
+    }
 }
