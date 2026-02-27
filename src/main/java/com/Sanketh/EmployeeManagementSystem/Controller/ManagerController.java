@@ -81,10 +81,19 @@ public class ManagerController {
     }
     @PutMapping("/viewownleaves")
     public ResponseEntity<?> viewAllOwnLeaves(@RequestHeader("Authorization") String authHeader, @RequestParam Integer managerId) {
-        if(!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase()))
-        {
+        if (!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase())) {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.OK);
         }
         List<Leave> res = leaveService.viewLeavesByManager(managerId);
         return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+    @PutMapping("/updateleavestatus")
+    public ResponseEntity<?> updateLeaveStatus(@RequestHeader("Authorization") String authHeader, @RequestParam Integer leaveId, @RequestParam String status) {
+        if (!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase())) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        String res = leaveService.updateLeaveStatus(leaveId, status.toUpperCase());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
 }
