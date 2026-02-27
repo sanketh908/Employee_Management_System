@@ -8,10 +8,11 @@ import com.Sanketh.EmployeeManagementSystem.Repository.AdminRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.DutyRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.EmployeeRepository;
 import com.Sanketh.EmployeeManagementSystem.Repository.ManagerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class DutyServiceImpl implements  DutyService {
     private final  DutyRepository dutyRepository;
     private final EmployeeRepository employeeRepository;

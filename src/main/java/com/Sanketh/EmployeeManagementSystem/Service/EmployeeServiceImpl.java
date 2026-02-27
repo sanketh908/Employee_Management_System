@@ -32,6 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Employee CheckEmpLogin(String username, String password) {
         return employeeRepository.findByUsernameAndPassword(username,password);
+
     }
 
     @Override
@@ -93,7 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Duty> viewAssingnDuties(Integer id) {
         Optional <Employee> employee = employeeRepository.findById(id);
         if(employee.isPresent()){
-            return dutyRepository.findByEmployee(employee.get());
+            return dutyRepository.findByEmployeeId(employee.get().getId());
         }
         return Collections.emptyList();
     }

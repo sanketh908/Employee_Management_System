@@ -27,6 +27,7 @@ public class ManagerController {
         this.managerService = managerService;
         this.adminService = adminService;
         this.dutyService = dutyService;
+
         this.jwtUtilizer = jwtUtilizer;
         this.isAuthorized = isAuthorized;
     }
