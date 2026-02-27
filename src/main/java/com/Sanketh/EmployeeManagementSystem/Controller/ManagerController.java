@@ -3,7 +3,6 @@ package com.Sanketh.EmployeeManagementSystem.Controller;
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.*;
-import org.apache.tomcat.Jar;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -59,5 +58,14 @@ public class ManagerController {
             return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>(managerService.viewAllManagers(), HttpStatus.OK);
+    }
+    @GetMapping("/updateemployeestatus")
+    public ResponseEntity<?> updateEmployeeAccountStatus(@RequestHeader("Authorization") String authHeader, @RequestParam Integer id,@RequestParam String status) {
+        String token = authHeader.substring(7);
+        if (!isAuthorized.isAuthorized(token, "manager")) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        String res = managerService.updateEmployeeAccountStatus(id, status);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }
