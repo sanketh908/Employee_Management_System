@@ -95,5 +95,13 @@ public class ManagerController {
         String res = leaveService.updateLeaveStatus(leaveId, status.toUpperCase());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
+    @PostMapping("/assigndutytoemployee")
+    public ResponseEntity<String> assignDutyToEmployee(@RequestBody Duty duty, @RequestHeader("Authorization") String authHeader,@RequestParam Integer managerId ,@RequestParam  Integer empId) {
 
+        if (!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase())) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        dutyService.assignDutyByManagerToEmployee(duty, empId, managerId);
+        return new ResponseEntity<>("Duty assigned successfully to Employee with ID: " + empId, HttpStatus.OK);
+    }
 }
