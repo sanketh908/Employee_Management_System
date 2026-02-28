@@ -1,6 +1,7 @@
 package com.Sanketh.EmployeeManagementSystem.Controller;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Employee;
+import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
 import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.EmployeeService;
 import com.Sanketh.EmployeeManagementSystem.Service.IsAuthorized;
@@ -72,5 +73,13 @@ public ResponseEntity<?> viewDutys(@RequestHeader("Authorization") String authHe
     }
     return new ResponseEntity<>(employeeService.viewAssingnDuties(id), HttpStatus.OK);
 }
+    @PutMapping("/applyleave")
+    public ResponseEntity<?> applyLeave(@RequestHeader("Authorization") String authHeader, @RequestParam Integer empId, @RequestBody Leave leave) {
+        if(!isAuthorized.isAuthorized(authHeader, "employee".toUpperCase())) {
+            return new ResponseEntity<>("Access Denied ! Need employee privileges", HttpStatus.FORBIDDEN);
+        }
+        Leave res = leaveService.applyLaveByManager(leave, empId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 
 }
