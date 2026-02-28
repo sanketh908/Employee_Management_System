@@ -18,6 +18,8 @@ public class Employee {
     private String gender;
     @Column(name = "emp_age",nullable = false)
     private  int age;
+    @Column(name = "emp_contact",nullable = false,unique = true)
+    private String contact;
     @Column(name = "emp_salary",nullable = false)
     private double salary;
     @Column(name = "emp_dept",nullable = false)
