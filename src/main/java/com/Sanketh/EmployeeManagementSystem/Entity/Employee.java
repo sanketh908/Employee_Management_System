@@ -31,7 +31,7 @@ public class Employee {
     @Column(name = "emp_password",nullable = false)
     private String password;
     @Column(name = "emp_accountstats",nullable = false)
-    private String accountstats;
+    private String accountants;
     @Column(name = "emp_role",nullable = false)
     private String role;
     @Column(nullable = false,name = "emp_profile_picture",columnDefinition = "LONGBLOB")

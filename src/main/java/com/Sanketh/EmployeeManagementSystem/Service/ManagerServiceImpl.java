@@ -101,7 +101,7 @@ public class ManagerServiceImpl implements ManagerService{
         Optional<Employee> employee=employeeRepository.findById(id);
         if(employee.isPresent()){
             Employee emp=employee.get();
-            emp.setAccountstats(status);
+            emp.setAccountants(status);
             employeeRepository.save(emp);
             return "employee account status updated succcessfully";
         }

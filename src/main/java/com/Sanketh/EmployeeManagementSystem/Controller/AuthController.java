@@ -64,7 +64,7 @@ public class AuthController {
                 return new ResponseEntity<>(res, HttpStatus.OK);
             }
             if (employee != null) {
-            if(employee.getAccountstats().equalsIgnoreCase("ACCEPTED")){
+            if(employee.getAccountants().equalsIgnoreCase("ACCEPTED")){
                     Map<String, Object> res = new HashMap<>();
                     res.put("role", "EMPLOYEE");
                     res.put("massage", "Employee login successful" );
@@ -73,7 +73,7 @@ public class AuthController {
                     return new ResponseEntity<>(res, HttpStatus.OK);
                 }
             else{
-                return new ResponseEntity<>("Employee account is not accepted yet. Please contact Administrator."+employee.getAccountstats(), HttpStatus.FORBIDDEN);
+                return new ResponseEntity<>("Employee account is not accepted yet. Please contact Administrator."+employee.getAccountants(), HttpStatus.FORBIDDEN);
             }
             }
             return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);

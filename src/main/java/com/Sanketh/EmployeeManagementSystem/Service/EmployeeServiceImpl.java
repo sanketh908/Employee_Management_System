@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setId(id);
         String password= RandomPasswordGenerator.geneateRandomPassword(8);
         employee.setPassword(password);
-        employee.setAccountstats("Pending");
+        employee.setAccountants("Pending");
         employee.setRole("Employee");
         employeeRepository.save(employee);
         return "Employee registered successfully";
@@ -83,7 +83,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         Optional<Employee> employee = employeeRepository.findById(id);
         if(employee.isPresent()){
-            employee.get().setAccountstats(status);
+            employee.get().setAccountants(status);
             employeeRepository.save(employee.get());
             return "Status updated to "+status;
         }
