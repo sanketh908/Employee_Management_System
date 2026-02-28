@@ -13,4 +13,5 @@ public interface DutyService {
     public List<Duty> viewDutiesAssignedByAdmin(Integer adminId);
     public List<Duty> viewDutiesAssignedByManager(Integer managerId);
 
+
 }

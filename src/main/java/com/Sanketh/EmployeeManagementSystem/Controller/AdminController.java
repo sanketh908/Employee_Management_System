@@ -76,13 +76,13 @@ public class AdminController {
         return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
     }
     @PutMapping("/updateemployeestutes")
-    public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empire, @RequestHeader("Authorization") String authHeader, @RequestParam String stuts) {
+    public ResponseEntity<String> updateEmployeeStatus(@RequestParam int empire, @RequestHeader("Authorization") String authHeader, @RequestParam String states) {
 
         if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-       String message = managerService.updateEmployeeAccountStatus(empire,stuts.toUpperCase());
+       String message = managerService.updateEmployeeAccountStatus(empire, states.toUpperCase());
         return new ResponseEntity<>(message, HttpStatus.OK);
 
     }
@@ -107,7 +107,7 @@ public class AdminController {
         return new ResponseEntity<>(leaves, HttpStatus.OK);
     }
     @DeleteMapping("/deleteemployee")
-    public ResponseEntity<String> deleteEmployee(@RequestParam int eid,@RequestHeader("Authorization") String authHeader,@RequestParam String empid) {
+    public ResponseEntity<String> deleteEmployee(@RequestParam int eid,@RequestHeader("Authorization") String authHeader) {
 
         if (!isAuthorized.isAuthorized(authHeader,"Admin")) {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges",HttpStatus.FORBIDDEN);

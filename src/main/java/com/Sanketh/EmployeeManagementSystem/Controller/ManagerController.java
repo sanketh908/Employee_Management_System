@@ -2,7 +2,6 @@ package com.Sanketh.EmployeeManagementSystem.Controller;
 
 import com.Sanketh.EmployeeManagementSystem.Entity.Duty;
 import com.Sanketh.EmployeeManagementSystem.Entity.Leave;
-import com.Sanketh.EmployeeManagementSystem.Security.JWTUtilizer;
 import com.Sanketh.EmployeeManagementSystem.Service.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +13,15 @@ import java.util.List;
 @RequestMapping("/manager")
 @CrossOrigin("*")
 public class ManagerController {
-    private final EmployeeService employeeService;
     private final ManagerService managerService;
-    private final AdminService adminService;
+
     private final DutyService dutyService;
-    private final JWTUtilizer jwtUtilizer;
     private final IsAuthorized isAuthorized;
     private final LeaveService leaveService;
 
-    public ManagerController(EmployeeService employeeService, ManagerService managerService, AdminService adminService, DutyService dutyService, JWTUtilizer jwtUtilizer, IsAuthorized isAuthorized, LeaveService leaveService) {
-
-        this.employeeService = employeeService;
+    public ManagerController( ManagerService managerService,  DutyService dutyService,  IsAuthorized isAuthorized, LeaveService leaveService) {
         this.managerService = managerService;
-        this.adminService = adminService;
         this.dutyService = dutyService;
-
-        this.jwtUtilizer = jwtUtilizer;
         this.isAuthorized = isAuthorized;
         this.leaveService = leaveService;
     }
@@ -112,5 +104,12 @@ public class ManagerController {
         List<Duty> res = managerService.viewAssingnDuties(managerId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
+   @PutMapping("/viewassigneddutiesbymanager")
+    public ResponseEntity<?> viewAssignedDutiesByEmployee(@RequestHeader("Authorization") String authHeader, @RequestParam Integer managerId) {
+        if (!isAuthorized.isAuthorized(authHeader, "manager".toUpperCase())) {
+            return new ResponseEntity<>("Access Denied ! Need Manager privileges", HttpStatus.FORBIDDEN);
+        }
+        List<Duty> res = dutyService.viewDutiesAssignedByManager(managerId);
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
 }
