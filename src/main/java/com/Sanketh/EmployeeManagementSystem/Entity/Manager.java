@@ -26,6 +26,6 @@ public class Manager {
     @OneToMany(mappedBy = "manager",cascade = CascadeType.ALL)
     private List<Employee> employees;
     @OneToMany(mappedBy = "assignedByManager",cascade = CascadeType.ALL)
-    private List<Duty> DutysAssined;
+    private List<Duty> DutyAssigned;
 
 }

@@ -32,7 +32,7 @@ public class DutyServiceImpl implements  DutyService {
         Optional<Admin> admin = adminRepository.findById(adminId);
         if (employee.isPresent() && admin.isPresent()) {
             duty.setEmployee(employee.get());
-            duty.setAssiendByAdmin(admin.get());
+            duty.setAssignedByAdmin(admin.get());
             return dutyRepository.save(duty);
         }
         return null;
@@ -44,7 +44,7 @@ public class DutyServiceImpl implements  DutyService {
         Optional<Admin> admin = adminRepository.findById(adminId);
         if (manager.isPresent() && admin.isPresent()) {
             duty.setManager(manager.get());
-            duty.setAssiendByAdmin(admin.get());
+            duty.setAssignedByAdmin(admin.get());
             return dutyRepository.save(duty);
         }
         return null;
@@ -56,7 +56,7 @@ public class DutyServiceImpl implements  DutyService {
         Optional<Manager> manager = managerRepository.findById(managerId);
         if (employee.isPresent() && manager.isPresent()) {
             duty.setEmployee(employee.get());
-            duty.setAssiendByManager(manager.get());
+            duty.setAssignedByManager(manager.get());
             return dutyRepository.save(duty);
         }
         return null;
@@ -74,11 +74,11 @@ public class DutyServiceImpl implements  DutyService {
 
     @Override
     public List<Duty> viewDutiesAssignedByAdmin(Integer adminId) {
-        return dutyRepository.findByAssignedByAdmin(adminId);
+        return dutyRepository.findByAssignedByAdminId(adminId);
     }
 
     @Override
     public List<Duty> viewDutiesAssignedByManager(Integer managerId) {
-        return dutyRepository.findByAssignedByManager(managerId);
+        return dutyRepository.findByAssignedByManagerId(managerId);
     }
 }

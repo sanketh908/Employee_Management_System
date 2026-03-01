@@ -72,7 +72,7 @@ public class AdminController {
             return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), null));
+        duty.setAssignedByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), null));
         return new ResponseEntity<>("Duty assigned successfully to Manager with ID: " + duty.getManager().getId(), HttpStatus.OK);
     }
     @PutMapping("/updateemployeestutes")
@@ -93,7 +93,7 @@ public class AdminController {
            return new ResponseEntity<>("Access Denied ! Need Admin privileges", HttpStatus.FORBIDDEN);
 
         }
-        duty.setAssiendByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), jwtUtilizer.validateToken(authHeader).get("password")));
+        duty.setAssignedByAdmin(adminService.checkAdminlogin(jwtUtilizer.validateToken(authHeader).get("username"), jwtUtilizer.validateToken(authHeader).get("password")));
         return new ResponseEntity<>("Duty assigned successfully to Employee with ID: " + duty.getEmployee().getId(), HttpStatus.OK);
 
     }
